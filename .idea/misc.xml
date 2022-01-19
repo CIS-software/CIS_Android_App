@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/CIS/app/src/main/res/layout/activity_main.xml" value="0.264" />
+<<<<<<< HEAD
         <entry key="..\:/CIS/app/src/main/res/layout/fragment_calendar.xml" value="0.14628623188405798" />
         <entry key="..\:/CIS/app/src/main/res/layout/fragment_events.xml" value="0.14628623188405798" />
+=======
+        <entry key="..\:/CIS/app/src/main/res/layout/fragment_events.xml" value="0.14447463768115942" />
+>>>>>>> dev
         <entry key="..\:/CIS/app/src/main/res/layout/fragment_news.xml" value="0.128" />
         <entry key="..\:/CIS/app/src/main/res/layout/fragment_profile.xml" value="0.13020833333333334" />
         <entry key="..\:/CIS/app/src/main/res/layout/maket_news_outside.xml" value="0.2" />
