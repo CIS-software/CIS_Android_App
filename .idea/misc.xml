@@ -5,9 +5,13 @@
       <map>
         <entry key="..\:/CIS/app/src/main/res/layout/activity_main.xml" value="0.264" />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <entry key="..\:/CIS/app/src/main/res/layout/fragment_calendar.xml" value="0.14628623188405798" />
         <entry key="..\:/CIS/app/src/main/res/layout/fragment_events.xml" value="0.14628623188405798" />
 =======
+=======
+        <entry key="..\:/CIS/app/src/main/res/layout/fragment_calendar.xml" value="0.1408514492753623" />
+>>>>>>> dev
         <entry key="..\:/CIS/app/src/main/res/layout/fragment_events.xml" value="0.14447463768115942" />
 >>>>>>> dev
         <entry key="..\:/CIS/app/src/main/res/layout/fragment_news.xml" value="0.128" />

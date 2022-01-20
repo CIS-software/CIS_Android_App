@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import first.android.cis.network.newsAPI.NewsListResponse
+import first.android.cis.ui.news.NewsFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,5 +28,6 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_profile))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 }
