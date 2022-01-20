@@ -12,20 +12,21 @@ import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
 import first.android.cis.network.QuestApp
 import first.android.cis.network.newsAPI.NewsListResponse
+import org.json.JSONArray
 
 class NewsFragment : Fragment() {
 
-
-
+    lateinit var recyclerNews: RecyclerView
+    lateinit var adapter: NewsAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View?
     {
         //newsViewModel =
-          //      ViewModelProvider(this).get(NewsViewModel::class.java)
+        //      ViewModelProvider(this).get(NewsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_news, container, false)
         val recyclerNews: RecyclerView =  root.findViewById(R.id.recyclerView)
         recyclerNews.layoutManager = LinearLayoutManager(this.context)

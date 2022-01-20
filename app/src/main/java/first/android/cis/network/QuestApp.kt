@@ -38,4 +38,5 @@ class QuestApp: Application() {
         newsApi = retrofit.create(NewsApi::class.java)
     }
 
+
 }
