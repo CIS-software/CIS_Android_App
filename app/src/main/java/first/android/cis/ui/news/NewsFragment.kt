@@ -6,17 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
-import first.android.cis.network.QuestApp
-import first.android.cis.network.newsAPI.NewsListResponse
-import org.json.JSONArray
 
 class NewsFragment : Fragment() {
 
-    lateinit var recyclerNews: RecyclerView
     lateinit var adapter: NewsAdapter
 
     override fun onCreateView(
@@ -25,22 +20,17 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View?
     {
-        //newsViewModel =
-        //      ViewModelProvider(this).get(NewsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_news, container, false)
+        val viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
         val recyclerNews: RecyclerView =  root.findViewById(R.id.recyclerView)
         recyclerNews.layoutManager = LinearLayoutManager(this.context)
-        val names = arrayListOf("Заголовок 1", "Заголовок2", "Заголовок3", "Заголовок4")
-        recyclerNews.adapter = NewsAdapter(names)
+        adapter = NewsAdapter()
+        recyclerNews.adapter = adapter
+        viewModel.getNewsVM()
+        viewModel.myNewsList.observe(viewLifecycleOwner,{list ->
+            list.body()?.let { adapter.setList(it) }
+        })
         return root
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val newsViewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        newsViewModel.fetchNewsList((activity?.application as QuestApp).newsApi)
-
     }
 
 

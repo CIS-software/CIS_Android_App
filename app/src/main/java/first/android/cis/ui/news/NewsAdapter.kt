@@ -1,14 +1,17 @@
 package first.android.cis.ui.news
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
+import first.android.cis.network.newsAPI.NewsListItem
 
-class NewsAdapter(private val names: List<String>): RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter(): RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+
+    var listNews = emptyList<NewsListItem>()
 
     class NewsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var headingTextView: TextView = itemView.findViewById(R.id.textViewHeading)
@@ -21,11 +24,17 @@ class NewsAdapter(private val names: List<String>): RecyclerView.Adapter<NewsAda
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        holder.headingTextView.text = names[position]
-        holder.descriptionTextView.text = "кот"
+        holder.headingTextView.text = listNews[position].newsTitle
+        holder.descriptionTextView.text = listNews[position].newsDescription
 
     }
     override fun getItemCount(): Int {
-        return names.size
+        return listNews.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setList(list: List<NewsListItem>){
+        listNews = list
+        notifyDataSetChanged()
     }
 }
