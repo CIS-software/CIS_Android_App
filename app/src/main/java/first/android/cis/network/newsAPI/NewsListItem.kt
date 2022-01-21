@@ -2,7 +2,7 @@ package first.android.cis.network.newsAPI
 
 import com.google.gson.annotations.SerializedName
 
-data class NewsListResponse(
+data class NewsListItem(
     @SerializedName("id")
     val newsId: Int,
 
