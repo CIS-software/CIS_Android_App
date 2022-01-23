@@ -12,16 +12,11 @@
         tools:layout="@layout/fragment_news" />
 
     <fragment
-        android:id="@+id/navigation_events"
-        android:name="first.android.cis.ui.events.EventsFragment"
-        android:label="Мероприятия"
-        tools:layout="@layout/fragment_events" />
-
-    <fragment
         android:id="@+id/navigation_calendar"
         android:name="first.android.cis.ui.calendar.CalendarFragment"
         android:label="Расписание"
         tools:layout="@layout/fragment_calendar" />
+
     <fragment
         android:id="@+id/navigation_profile"
         android:name="first.android.cis.ui.profile.ProfileFragment"
