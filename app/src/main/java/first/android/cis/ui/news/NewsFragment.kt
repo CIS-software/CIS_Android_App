@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
+import first.android.cis.databinding.FragmentNewsBinding
+import first.android.cis.ui.news.openedNews.OpenedNewsViewModel
 
 class NewsFragment : Fragment() {
+    private val openHeading: OpenedNewsViewModel by activityViewModels()
 
     lateinit var adapter: NewsAdapter
 
@@ -32,7 +37,5 @@ class NewsFragment : Fragment() {
         })
         return root
     }
-
-
 }
 

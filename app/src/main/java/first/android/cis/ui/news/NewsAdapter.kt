@@ -1,10 +1,13 @@
 package first.android.cis.ui.news
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
 import first.android.cis.network.newsAPI.NewsListItem
@@ -26,6 +29,9 @@ class NewsAdapter(): RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         holder.headingTextView.text = listNews[position].newsTitle
         holder.descriptionTextView.text = listNews[position].newsDescription
+        holder.itemView.setOnClickListener{
+            holder.itemView.findNavController().navigate(R.id.action_navigation_news_to_openedNews2)
+        }
 
     }
     override fun getItemCount(): Int {

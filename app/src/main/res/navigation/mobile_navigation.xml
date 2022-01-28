@@ -9,7 +9,12 @@
         android:id="@+id/navigation_news"
         android:name="first.android.cis.ui.news.NewsFragment"
         android:label="Новости"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news"
+        >
+        <action
+            android:id="@+id/action_navigation_news_to_openedNews2"
+            app:destination="@id/openedNews" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_calendar"
@@ -22,4 +27,11 @@
         android:name="first.android.cis.ui.profile.ProfileFragment"
         android:label="Профиль"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/openedNews"
+        android:name="first.android.cis.ui.news.openedNews.OpenedNews"
+        android:label="opened_news_fragment"
+        tools:layout="@layout/opened_news_fragment"
+        />
 </navigation>
