@@ -33,5 +33,12 @@
         android:name="first.android.cis.ui.news.openedNews.OpenedNews"
         android:label="opened_news_fragment"
         tools:layout="@layout/opened_news_fragment"
-        />
+        >
+        <argument
+            android:name="Heading"
+            app:argType="string" />
+        <argument
+            android:name="Discription"
+            app:argType="string" />
+    </fragment>
 </navigation>
