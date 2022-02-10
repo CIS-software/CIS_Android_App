@@ -2,11 +2,11 @@ package first.android.cis.ui.news.openedNews
 
 import android.app.Application
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -31,12 +31,12 @@ class OpenedNews: Fragment() {
             newsDiscript = newsDiscript))
             .get(OpenedNewsViewModel::class.java)
 
-        mViewModel.openedHeading.observe(activity as LifecycleOwner,{
+        mViewModel.openedHeading.observe(activity as LifecycleOwner) {
             headingView.text = it
-        })
-        mViewModel.openedDiscript.observe(activity as LifecycleOwner,{
+        }
+        mViewModel.openedDiscript.observe(activity as LifecycleOwner) {
             discriptionView.text = it
-        })
+        }
         return root
     }
 

@@ -28,14 +28,13 @@ class NewsFragment : Fragment() {
         adapter = NewsAdapter()
         recyclerNews.adapter = adapter
         viewModel.getNewsVM()
-        viewModel.myNewsList.observe(viewLifecycleOwner,{list ->
-            if(list.isSuccessful){
+        viewModel.myNewsList.observe(viewLifecycleOwner) { list ->
+            if (list.isSuccessful) {
                 list.body()?.let { adapter.setList(it) }
-            }else{
+            } else {
                 Toast.makeText(activity, "Ошибка подключения", Toast.LENGTH_LONG).show()
             }
-
-        })
+        }
         return root
     }
 }

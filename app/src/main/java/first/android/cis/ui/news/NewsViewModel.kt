@@ -14,7 +14,12 @@ class NewsViewModel : ViewModel() {
 
     fun getNewsVM(){
         viewModelScope.launch {
-            myNewsList.value =  repo.getNewsRepo()
+            try{
+                myNewsList.value =  repo.getNewsRepo()
+            }catch (exception: Exception){
+                //TODO Нужно как-то обработать исключение оффлайн сервера
+                null
+            }
         }
     }
 }
