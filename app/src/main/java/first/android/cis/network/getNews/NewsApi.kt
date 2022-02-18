@@ -1,5 +1,6 @@
-package first.android.cis.network.newsAPI
+package first.android.cis.network.getNews
 
+import first.android.cis.models.NewsList
 import retrofit2.Response
 import retrofit2.http.GET
 

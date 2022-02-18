@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_navigation_news_to_openedNews2"
             app:destination="@id/openedNews" />
+        <action
+            android:id="@+id/action_navigation_news_to_addNewsFragment"
+            app:destination="@id/addNewsFragment" />
     </fragment>
 
     <fragment
@@ -30,7 +33,7 @@
 
     <fragment
         android:id="@+id/openedNews"
-        android:name="first.android.cis.ui.news.openedNews.OpenedNews"
+        android:name="first.android.cis.ui.news.openedNewsFragment.OpenedNewsFragment"
         android:label="opened_news_fragment"
         tools:layout="@layout/opened_news_fragment"
         >
@@ -41,4 +44,9 @@
             android:name="Discription"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/addNewsFragment"
+        android:name="first.android.cis.ui.news.addNewsFragment.AddNewsFragment"
+        android:label="add_news_fragment"
+        tools:layout="@layout/add_news_fragment" />
 </navigation>

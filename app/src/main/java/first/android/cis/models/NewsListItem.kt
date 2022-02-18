@@ -1,10 +1,10 @@
-package first.android.cis.network.newsAPI
+package first.android.cis.models
 
 import com.google.gson.annotations.SerializedName
 
 data class NewsListItem(
     @SerializedName("id")
-    val newsId: Int,
+    val newsId: Int?,
 
     @SerializedName("title")
     val newsTitle: String,
@@ -13,6 +13,6 @@ data class NewsListItem(
     val newsDescription: String,
 
     @SerializedName("photo")
-    val newsPhoto: String
+    val newsPhoto: String?
 )
 

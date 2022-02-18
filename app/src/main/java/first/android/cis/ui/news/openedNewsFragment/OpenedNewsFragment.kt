@@ -1,4 +1,4 @@
-package first.android.cis.ui.news.openedNews
+package first.android.cis.ui.news.openedNewsFragment
 
 import android.app.Application
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.navigation.fragment.navArgs
 import first.android.cis.R
 
 
-class OpenedNews: Fragment() {
+class OpenedNewsFragment: Fragment() {
     private lateinit var mViewModel: OpenedNewsViewModel
 
     override fun onCreateView(
@@ -23,7 +23,7 @@ class OpenedNews: Fragment() {
         val root = inflater.inflate(R.layout.opened_news_fragment, container, false)
         val headingView: TextView = root.findViewById(R.id.oppenedNewsHeading)
         val discriptionView: TextView = root.findViewById(R.id.oppenedNewsDiscript)
-        val args: OpenedNewsArgs by navArgs()
+        val args: OpenedNewsFragmentArgs by navArgs()
         val newsHeading = args.heading
         val newsDiscript = args.discription
         mViewModel = ViewModelProvider(this, NewsFactory(application = Application(),
@@ -41,6 +41,6 @@ class OpenedNews: Fragment() {
     }
 
     companion object {
-        fun newInstance() = OpenedNews()
+        fun newInstance() = OpenedNewsFragment()
     }
 }

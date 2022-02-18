@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
-import first.android.cis.network.newsAPI.NewsListItem
+import first.android.cis.models.NewsListItem
 
-
-class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+//TODO Убери open
+open class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     private var listNews = emptyList<NewsListItem>()
 
@@ -37,6 +37,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             holder.itemView.findNavController().navigate(action)
         }
     }
+
     override fun getItemCount(): Int {
         return listNews.size
     }

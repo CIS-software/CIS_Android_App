@@ -1,19 +1,23 @@
 package first.android.cis.ui.news
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
+import first.android.cis.network.getNews.NewsRepository
 
 class NewsFragment : Fragment() {
-
-    lateinit var adapter: NewsAdapter
+    private val myAdapter by lazy{NewsAdapter()}
+    private lateinit var viewModel: NewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,21 +25,42 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View?
     {
+        val actionAddNews = NewsFragmentDirections.actionNavigationNewsToAddNewsFragment()
         val root = inflater.inflate(R.layout.fragment_news, container, false)
-        val viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
-        val recyclerNews: RecyclerView =  root.findViewById(R.id.recyclerView)
-        recyclerNews.layoutManager = LinearLayoutManager(this.context)
-        adapter = NewsAdapter()
-        recyclerNews.adapter = adapter
-        viewModel.getNewsVM()
-        viewModel.myNewsList.observe(viewLifecycleOwner) { list ->
-            if (list.isSuccessful) {
-                list.body()?.let { adapter.setList(it) }
+        val addNewsButton: Button = root.findViewById(R.id.add_news_button)
+        addNewsButton.setOnClickListener{
+            addNewsButton.findNavController().navigate(actionAddNews    )
+        }
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val viewModelFactory = NewsFactory(repository = NewsRepository())
+        viewModel = ViewModelProvider(this, viewModelFactory).get(NewsViewModel::class.java)
+        val feedItem = myAdapter.itemCount
+        Toast.makeText(activity, "FeedItem $feedItem", Toast.LENGTH_LONG).show()
+        viewModel.myNewsList.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
+                response.body()?.let { myAdapter.setList(it) }
+                //Toast.makeText(activity, "Данные получены", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(activity, "Ошибка подключения", Toast.LENGTH_LONG).show()
             }
         }
-        return root
+        setupRecyclerView(view)
+
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setupRecyclerView(view: View){
+        if (myAdapter.itemCount==0){
+            viewModel.getNewsVM()
+        }
+        val recyclerNews: RecyclerView by lazy{ view.findViewById(R.id.recyclerView)}
+        recyclerNews.layoutManager = LinearLayoutManager(activity)
+        recyclerNews.adapter = myAdapter
+        myAdapter.notifyDataSetChanged()
+
     }
 }
-
