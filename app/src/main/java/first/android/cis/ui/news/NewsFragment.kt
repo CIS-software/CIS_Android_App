@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
 import first.android.cis.network.getNews.NewsRepository
 
+//CIS-24-тестовый-таск
 class NewsFragment : Fragment() {
     private val myAdapter by lazy{NewsAdapter()}
     private lateinit var viewModel: NewsViewModel
