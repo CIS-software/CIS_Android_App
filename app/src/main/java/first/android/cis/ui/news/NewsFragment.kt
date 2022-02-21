@@ -43,7 +43,6 @@ class NewsFragment : Fragment() {
         viewModel.myNewsList.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 response.body()?.let { myAdapter.setList(it) }
-                //Toast.makeText(activity, "Данные получены", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(activity, "Ошибка подключения", Toast.LENGTH_LONG).show()
             }

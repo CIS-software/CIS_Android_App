@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.fragment.app.DialogFragment
 import first.android.cis.R
 import first.android.cis.network.Retrofit
 import first.android.cis.models.NewsListItem
@@ -41,7 +40,7 @@ class AddNewsFragment : Fragment() {
                         editHeading: EditText, editDiscript: EditText){
         val retroft = Retrofit.buildService(PostApi::class.java)
         val newsList = NewsListItem(newsId = null, newsTitle = heading,
-            newsDescription = discript, newsPhoto = null )
+            newsDescription = discript, newsPhoto = null , newsTimeDate = null)
         CoroutineScope(Dispatchers.Main).launch {
             retroft.addNews(newsList)
         }

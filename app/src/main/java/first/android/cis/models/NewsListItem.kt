@@ -13,6 +13,10 @@ data class NewsListItem(
     val newsDescription: String,
 
     @SerializedName("photo")
-    val newsPhoto: String?
+    val newsPhoto: String?,
+
+    @SerializedName("time-date")
+    val newsTimeDate: String?
+
 )
 
