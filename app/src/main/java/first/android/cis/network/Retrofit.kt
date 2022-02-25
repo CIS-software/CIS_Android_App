@@ -8,16 +8,10 @@ object Retrofit {
 
     private val retrofit =
         Retrofit.Builder()
-            .baseUrl("http://192.168.100.8:8080")
+            .baseUrl("http://192.168.215.127:8080")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
     val newsApi: NewsApi =
         retrofit.create(NewsApi::class.java)
-
-    //TODO: Переделать возврат переменной сверху, сделать как снизу.
-    fun <T> buildService(service: Class<T>): T{
-        return retrofit.create(service)
-    }
-
 }

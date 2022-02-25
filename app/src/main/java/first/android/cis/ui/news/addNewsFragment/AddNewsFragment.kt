@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import first.android.cis.R
+import first.android.cis.models.NewsListForAdd
 import first.android.cis.network.Retrofit
-import first.android.cis.models.NewsListItem
 import first.android.cis.network.postNews.PostApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,11 +38,10 @@ class AddNewsFragment : Fragment() {
 
     private fun addNews(heading: String, discript: String,
                         editHeading: EditText, editDiscript: EditText){
-        val retroft = Retrofit.buildService(PostApi::class.java)
-        val newsList = NewsListItem(newsId = null, newsTitle = heading,
+        val newsList = NewsListForAdd(newsTitle = heading,
             newsDescription = discript, newsPhoto = null , newsTimeDate = null)
         CoroutineScope(Dispatchers.Main).launch {
-            retroft.addNews(newsList)
+            Retrofit.newsApi.addNews(newsList)
         }
         DialogConfirmed().show(childFragmentManager, DialogConfirmed.TAG)
         editHeading.text = null

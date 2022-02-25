@@ -5,12 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import first.android.cis.R
+import first.android.cis.network.Retrofit
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class OpenedNewsFragment: Fragment() {
@@ -26,11 +31,19 @@ class OpenedNewsFragment: Fragment() {
         val args: OpenedNewsFragmentArgs by navArgs()
         val newsHeading = args.heading
         val newsDiscript = args.discription
+        val newsId = args.id
+        val deleteBtn: Button = root.findViewById(R.id.deleteNewsBTN)
+        initDeleteButton(deleteBtn)
+        deleteBtn.setOnClickListener{
+            CoroutineScope(Dispatchers.Main).launch {
+                Retrofit.newsApi.deleteNews(newsId)
+            }
+        }
+
         mViewModel = ViewModelProvider(this, NewsFactory(application = Application(),
             newsHeading = newsHeading,
             newsDiscript = newsDiscript))
             .get(OpenedNewsViewModel::class.java)
-
         mViewModel.openedHeading.observe(activity as LifecycleOwner) {
             headingView.text = it
         }
@@ -39,6 +52,12 @@ class OpenedNewsFragment: Fragment() {
         }
         return root
     }
+
+    private fun initDeleteButton(deleteButton: Button){
+
+    }
+
+
 
     companion object {
         fun newInstance() = OpenedNewsFragment()
