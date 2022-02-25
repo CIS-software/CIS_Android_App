@@ -13,9 +13,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
-import first.android.cis.network.getNews.NewsRepository
+import first.android.cis.network.NewsRepository
 
-//CIS-26v2-тестовый-таск
 class NewsFragment : Fragment() {
     private val myAdapter by lazy{NewsAdapter()}
     private lateinit var viewModel: NewsViewModel
@@ -39,8 +38,6 @@ class NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val viewModelFactory = NewsFactory(repository = NewsRepository())
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewsViewModel::class.java)
-        val feedItem = myAdapter.itemCount
-        Toast.makeText(activity, "FeedItem $feedItem", Toast.LENGTH_LONG).show()
         viewModel.myNewsList.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 response.body()?.let { myAdapter.setList(it) }
@@ -49,7 +46,6 @@ class NewsFragment : Fragment() {
             }
         }
         setupRecyclerView(view)
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
