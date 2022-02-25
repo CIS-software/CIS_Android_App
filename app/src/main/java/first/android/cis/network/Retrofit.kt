@@ -1,6 +1,5 @@
 package first.android.cis.network
 
-import first.android.cis.network.getNews.NewsApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -1,6 +1,5 @@
-package first.android.cis.network.getNews
+package first.android.cis.network
 
-import first.android.cis.network.Retrofit
 import first.android.cis.models.NewsList
 import retrofit2.Response
 

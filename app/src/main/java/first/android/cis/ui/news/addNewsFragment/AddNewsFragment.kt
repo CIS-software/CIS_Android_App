@@ -1,6 +1,5 @@
 package first.android.cis.ui.news.addNewsFragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,14 +10,11 @@ import android.widget.EditText
 import first.android.cis.R
 import first.android.cis.models.NewsListForAdd
 import first.android.cis.network.Retrofit
-import first.android.cis.network.postNews.PostApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AddNewsFragment : Fragment() {
-
-    private lateinit var viewModel: AddNewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +32,10 @@ class AddNewsFragment : Fragment() {
         return root
     }
 
-    private fun addNews(heading: String, discript: String,
-                        editHeading: EditText, editDiscript: EditText){
+    private fun addNews(heading: String,
+                        discript: String,
+                        editHeading: EditText,
+                        editDiscript: EditText){
         val newsList = NewsListForAdd(newsTitle = heading,
             newsDescription = discript, newsPhoto = null , newsTimeDate = null)
         CoroutineScope(Dispatchers.Main).launch {
@@ -46,14 +44,6 @@ class AddNewsFragment : Fragment() {
         DialogConfirmed().show(childFragmentManager, DialogConfirmed.TAG)
         editHeading.text = null
         editDiscript.text = null
-    }
-
-
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AddNewsViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     companion object {

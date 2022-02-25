@@ -1,4 +1,4 @@
-package first.android.cis.ui.news
+package first.android.cis.ui.news.mainNewsFragment
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -35,7 +35,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         val newsHeading: String = listNews[position].newsTitle
         val newsDiscript: String = listNews[position].newsDescription
         val newsId: Int = listNews[position].newsId
-        val action =  NewsFragmentDirections.actionNavigationNewsToOpenedNews2(
+        val action = NewsFragmentDirections.actionNavigationNewsToOpenedNews2(
             newsId,
             newsHeading,
             newsDiscript,

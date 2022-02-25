@@ -1,4 +1,4 @@
-package first.android.cis.ui.news
+package first.android.cis.ui.news.mainNewsFragment
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

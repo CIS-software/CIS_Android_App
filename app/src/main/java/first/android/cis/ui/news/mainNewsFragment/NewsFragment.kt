@@ -1,4 +1,4 @@
-package first.android.cis.ui.news
+package first.android.cis.ui.news.mainNewsFragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -16,7 +16,7 @@ import first.android.cis.R
 import first.android.cis.network.NewsRepository
 
 class NewsFragment : Fragment() {
-    private val myAdapter by lazy{NewsAdapter()}
+    private val myAdapter by lazy{ NewsAdapter() }
     private lateinit var viewModel: NewsViewModel
 
     override fun onCreateView(
@@ -57,6 +57,5 @@ class NewsFragment : Fragment() {
         recyclerNews.layoutManager = LinearLayoutManager(activity)
         recyclerNews.adapter = myAdapter
         myAdapter.notifyDataSetChanged()
-
     }
 }
