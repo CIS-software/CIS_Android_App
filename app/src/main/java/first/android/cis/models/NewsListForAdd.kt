@@ -2,10 +2,7 @@ package first.android.cis.models
 
 import com.google.gson.annotations.SerializedName
 
-data class NewsListItem(
-    @SerializedName("id")
-    val newsId: Int,
-
+data class NewsListForAdd(
     @SerializedName("title")
     val newsTitle: String,
 
@@ -19,4 +16,3 @@ data class NewsListItem(
     val newsTimeDate: String?
 
 )
-

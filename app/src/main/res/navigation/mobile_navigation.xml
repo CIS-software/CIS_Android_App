@@ -38,11 +38,15 @@
         tools:layout="@layout/opened_news_fragment"
         >
         <argument
+            android:name="Id"
+            app:argType="integer"/>
+        <argument
             android:name="Heading"
             app:argType="string" />
         <argument
             android:name="Discription"
             app:argType="string" />
+
     </fragment>
     <fragment
         android:id="@+id/addNewsFragment"

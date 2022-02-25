@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
 import first.android.cis.network.getNews.NewsRepository
 
+//CIS-26v2-тестовый-таск
 class NewsFragment : Fragment() {
     private val myAdapter by lazy{NewsAdapter()}
     private lateinit var viewModel: NewsViewModel
@@ -29,7 +30,7 @@ class NewsFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_news, container, false)
         val addNewsButton: Button = root.findViewById(R.id.add_news_button)
         addNewsButton.setOnClickListener{
-            addNewsButton.findNavController().navigate(actionAddNews    )
+            addNewsButton.findNavController().navigate(actionAddNews)
         }
         return root
     }

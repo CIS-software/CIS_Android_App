@@ -40,11 +40,16 @@ open class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         dateTimeStr = formattedDateTime.hour.toString() +":"+ formattedDateTime.minute + " " +
                 formattedDateTime.dayOfMonth + " " + formattedDateTime.month
         holder.dateTime.text = dateTimeStr
-
-
         val newsHeading: String = listNews[position].newsTitle
         val newsDiscript: String = listNews[position].newsDescription
-        val action = NewsFragmentDirections.actionNavigationNewsToOpenedNews2(newsHeading, newsDiscript)
+        val newsId: Int = listNews[position].newsId
+        val action =  NewsFragmentDirections.actionNavigationNewsToOpenedNews2(
+            newsId,
+            newsHeading,
+            newsDiscript,
+
+        )
+
         holder.itemView.setOnClickListener{
             holder.itemView.findNavController().navigate(action)
         }
