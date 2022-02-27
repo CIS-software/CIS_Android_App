@@ -1,12 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id("androidx.navigation.safeargs")
 }
-apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "first.android.cis"
