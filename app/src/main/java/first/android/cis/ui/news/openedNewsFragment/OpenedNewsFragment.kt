@@ -54,10 +54,8 @@ class OpenedNewsFragment: Fragment() {
     }
 
     private fun initDeleteButton(deleteButton: Button){
-
+        //TODO: Действие на кнопку удаление записи
     }
-
-
 
     companion object {
         fun newInstance() = OpenedNewsFragment()

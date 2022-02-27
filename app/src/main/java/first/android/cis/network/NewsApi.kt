@@ -1,4 +1,4 @@
-package first.android.cis.network.getNews
+package first.android.cis.network
 
 import first.android.cis.models.NewsList
 import first.android.cis.models.NewsListForAdd

@@ -1,7 +1,6 @@
-package first.android.cis.ui.news
+package first.android.cis.ui.news.mainNewsFragment
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,7 @@ import first.android.cis.models.NewsListItem
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-//TODO Убери open
-open class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     private var listNews = emptyList<NewsListItem>()
 
@@ -33,23 +31,15 @@ open class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         holder.headingTextView.text = listNews[position].newsTitle
         holder.descriptionTextView.text = listNews[position].newsDescription
-        //TODO: Вынеси форматирование даты в отдельную функцию
-        var dateTimeStr: String? = listNews[position].newsTimeDate
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        val formattedDateTime = LocalDateTime.parse(dateTimeStr, formatter)
-        dateTimeStr = formattedDateTime.hour.toString() +":"+ formattedDateTime.minute + " " +
-                formattedDateTime.dayOfMonth + " " + formattedDateTime.month
-        holder.dateTime.text = dateTimeStr
+        holder.dateTime.text = formatingDate(listNews[position].newsTimeDate)
         val newsHeading: String = listNews[position].newsTitle
         val newsDiscript: String = listNews[position].newsDescription
         val newsId: Int = listNews[position].newsId
-        val action =  NewsFragmentDirections.actionNavigationNewsToOpenedNews2(
+        val action = NewsFragmentDirections.actionNavigationNewsToOpenedNews2(
             newsId,
             newsHeading,
             newsDiscript,
-
         )
-
         holder.itemView.setOnClickListener{
             holder.itemView.findNavController().navigate(action)
         }
@@ -63,5 +53,14 @@ open class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     fun setList(list: List<NewsListItem>){
         listNews = list
         notifyDataSetChanged()
+    }
+
+    fun formatingDate(dateTimeStrArg: String?): String {
+        var dateTimeStr: String? = dateTimeStrArg
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val formattedDateTime = LocalDateTime.parse(dateTimeStr, formatter)
+        dateTimeStr = formattedDateTime.hour.toString() +":"+ formattedDateTime.minute + " " +
+                formattedDateTime.dayOfMonth + " " + formattedDateTime.month
+        return dateTimeStr
     }
 }
