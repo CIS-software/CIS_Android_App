@@ -32,13 +32,7 @@ class OpenedNewsFragment: Fragment() {
         val newsHeading = args.heading
         val newsDiscript = args.discription
         val newsId = args.id
-        val deleteBtn: Button = root.findViewById(R.id.deleteNewsBTN)
-        initDeleteButton(deleteBtn)
-        deleteBtn.setOnClickListener{
-            CoroutineScope(Dispatchers.Main).launch {
-                Retrofit.newsApi.deleteNews(newsId)
-            }
-        }
+        initDeleteButton(root, newsId)
 
         mViewModel = ViewModelProvider(this, NewsFactory(application = Application(),
             newsHeading = newsHeading,
@@ -53,8 +47,25 @@ class OpenedNewsFragment: Fragment() {
         return root
     }
 
-    private fun initDeleteButton(deleteButton: Button){
-        //TODO: Действие на кнопку удаление записи
+    private fun initDeleteButton(root: View, newsId: Int) {
+        val deleteBtn: Button = root.findViewById(R.id.deleteNewsBTN)
+        deleteBtn.setOnClickListener{
+            DialogAskForDelete().show(childFragmentManager, DialogAskForDelete.TAG)
+            //CoroutineScope(Dispatchers.Main).launch {
+                //Retrofit.newsApi.deleteNews(newsId)
+            //}
+        }
+    }
+    fun deleteNews(){
+        CoroutineScope(Dispatchers.Main).launch {
+            Retrofit.newsApi.deleteNews(getNewsId())
+        }
+    }
+
+    private fun getNewsId(): Int {
+        val args: OpenedNewsFragmentArgs by navArgs()
+        val newsId = args.id
+        return newsId
     }
 
     companion object {
