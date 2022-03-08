@@ -11,7 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 
 
 class MainActivity : AppCompatActivity() {
-    //Привет с хонора
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
