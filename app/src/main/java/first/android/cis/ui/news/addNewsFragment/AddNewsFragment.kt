@@ -31,11 +31,12 @@ class AddNewsFragment : Fragment() {
         }
         return root
     }
-
+    //TODO: Надо подумать стоит ли реализовывать кнопку "добавить" через init
     private fun addNews(heading: String,
                         discript: String,
                         editHeading: EditText,
                         editDiscript: EditText){
+        //TODO: Окно "Успех, запись добавлена" вылезит, даже если произойдет ошибка при запросе
         val newsList = NewsListForAdd(newsTitle = heading,
             newsDescription = discript, newsPhoto = null , newsTimeDate = null)
         CoroutineScope(Dispatchers.Main).launch {

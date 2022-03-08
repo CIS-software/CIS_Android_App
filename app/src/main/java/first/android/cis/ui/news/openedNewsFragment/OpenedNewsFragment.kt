@@ -17,10 +17,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 class OpenedNewsFragment: Fragment() {
     private lateinit var mViewModel: OpenedNewsViewModel
-
+    private val args: OpenedNewsFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,18 +27,9 @@ class OpenedNewsFragment: Fragment() {
         val root = inflater.inflate(R.layout.opened_news_fragment, container, false)
         val headingView: TextView = root.findViewById(R.id.oppenedNewsHeading)
         val discriptionView: TextView = root.findViewById(R.id.oppenedNewsDiscript)
-        val args: OpenedNewsFragmentArgs by navArgs()
         val newsHeading = args.heading
         val newsDiscript = args.discription
-        val newsId = args.id
-        val deleteBtn: Button = root.findViewById(R.id.deleteNewsBTN)
-        initDeleteButton(deleteBtn)
-        deleteBtn.setOnClickListener{
-            CoroutineScope(Dispatchers.Main).launch {
-                Retrofit.newsApi.deleteNews(newsId)
-            }
-        }
-
+        initDeleteButton(root)
         mViewModel = ViewModelProvider(this, NewsFactory(application = Application(),
             newsHeading = newsHeading,
             newsDiscript = newsDiscript))
@@ -53,8 +43,11 @@ class OpenedNewsFragment: Fragment() {
         return root
     }
 
-    private fun initDeleteButton(deleteButton: Button){
-        //TODO: Действие на кнопку удаление записи
+    private fun initDeleteButton(root: View) {
+        val deleteBtn: Button = root.findViewById(R.id.deleteNewsBTN)
+        deleteBtn.setOnClickListener{
+            DialogAskForDelete(args.id).show(childFragmentManager, DialogAskForDelete.TAG)
+        }
     }
 
     companion object {

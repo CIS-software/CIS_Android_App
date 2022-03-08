@@ -9,12 +9,13 @@ import retrofit2.http.*
 
 
 interface NewsApi {
-    @GET("./news")
+    @GET("/news")
     suspend fun getNews(): Response<NewsList>
 
-    @DELETE("./news")
-    suspend fun deleteNews(@Field("id")id: Int): Call<Unit>
-
-    @POST("./news")
+    @POST("/news")
     suspend fun addNews(@Body newsList: NewsListForAdd): NewsListItem
+
+    @DELETE("/news/{id}")
+    suspend fun deleteNews(@Path("id")id: Int)
+
 }
