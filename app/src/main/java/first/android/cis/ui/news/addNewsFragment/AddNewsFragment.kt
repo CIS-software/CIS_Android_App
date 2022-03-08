@@ -3,6 +3,7 @@ package first.android.cis.ui.news.addNewsFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -20,6 +21,7 @@ class AddNewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         val root = inflater.inflate(R.layout.add_news_fragment, container, false)
         val postNewsButton: Button = root.findViewById(R.id.post_news_butt)
         val editHeading: EditText = root.findViewById(R.id.inputHeadingEditT)
@@ -45,6 +47,16 @@ class AddNewsFragment : Fragment() {
         DialogConfirmed().show(childFragmentManager, DialogConfirmed.TAG)
         editHeading.text = null
         editDiscript.text = null
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                activity?.onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

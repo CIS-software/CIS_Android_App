@@ -46,7 +46,6 @@
         <argument
             android:name="Discription"
             app:argType="string" />
-
     </fragment>
     <fragment
         android:id="@+id/addNewsFragment"

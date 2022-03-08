@@ -2,20 +2,16 @@ package first.android.cis.ui.news.openedNewsFragment
 
 import android.app.Application
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import first.android.cis.MainActivity
 import first.android.cis.R
-import first.android.cis.network.Retrofit
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class OpenedNewsFragment: Fragment() {
     private lateinit var mViewModel: OpenedNewsViewModel
@@ -24,6 +20,7 @@ class OpenedNewsFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+       setHasOptionsMenu(true)
         val root = inflater.inflate(R.layout.opened_news_fragment, container, false)
         val headingView: TextView = root.findViewById(R.id.oppenedNewsHeading)
         val discriptionView: TextView = root.findViewById(R.id.oppenedNewsDiscript)
@@ -50,7 +47,18 @@ class OpenedNewsFragment: Fragment() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                activity?.onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     companion object {
         fun newInstance() = OpenedNewsFragment()
     }
+
 }
