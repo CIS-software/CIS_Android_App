@@ -20,11 +20,12 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         val headingTextView: TextView = itemView.findViewById(R.id.textViewHeading)
         val descriptionTextView: TextView = itemView.findViewById(R.id.textViewDescription)
         val dateTime: TextView = itemView.findViewById(R.id.dateTimeView)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.maket_news_outside, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.maket_news_outside,
+            parent,
+            false)
         return NewsViewHolder(itemView)
     }
 
@@ -39,6 +40,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             newsId,
             newsHeading,
             newsDiscript,
+            formatingDate(listNews[position].newsTimeDate)
         )
         holder.itemView.setOnClickListener{
             holder.itemView.findNavController().navigate(action)

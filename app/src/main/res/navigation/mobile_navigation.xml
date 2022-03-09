@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/openedNews"
         android:name="first.android.cis.ui.news.openedNewsFragment.OpenedNewsFragment"
-        android:label="opened_news_fragment"
+        android:label="Запись"
         tools:layout="@layout/opened_news_fragment"
         >
         <argument
@@ -46,10 +46,13 @@
         <argument
             android:name="Discription"
             app:argType="string" />
+        <argument
+            android:name="DateTime"
+            app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/addNewsFragment"
         android:name="first.android.cis.ui.news.addNewsFragment.AddNewsFragment"
-        android:label="add_news_fragment"
+        android:label="Добавить запись"
         tools:layout="@layout/add_news_fragment" />
 </navigation>

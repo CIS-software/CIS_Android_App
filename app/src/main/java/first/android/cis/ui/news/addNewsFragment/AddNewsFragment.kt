@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import first.android.cis.R
 import first.android.cis.models.NewsListForAdd
 import first.android.cis.network.Retrofit

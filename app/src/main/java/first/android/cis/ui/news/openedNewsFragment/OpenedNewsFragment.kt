@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import first.android.cis.MainActivity
 import first.android.cis.R
 
 class OpenedNewsFragment: Fragment() {
@@ -20,22 +18,25 @@ class OpenedNewsFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
         val root = inflater.inflate(R.layout.opened_news_fragment, container, false)
         val headingView: TextView = root.findViewById(R.id.oppenedNewsHeading)
         val discriptionView: TextView = root.findViewById(R.id.oppenedNewsDiscript)
-        val newsHeading = args.heading
-        val newsDiscript = args.discription
+        val timeDateView: TextView = root.findViewById(R.id.oppenedTimeDate)
         initDeleteButton(root)
         mViewModel = ViewModelProvider(this, NewsFactory(application = Application(),
-            newsHeading = newsHeading,
-            newsDiscript = newsDiscript))
+            newsHeading = args.heading,
+            newsDiscript = args.discription,
+            newsTimeDate = args.dateTime))
             .get(OpenedNewsViewModel::class.java)
         mViewModel.openedHeading.observe(activity as LifecycleOwner) {
             headingView.text = it
         }
         mViewModel.openedDiscript.observe(activity as LifecycleOwner) {
             discriptionView.text = it
+        }
+        mViewModel.openedTimeDate.observe(activity as LifecycleOwner){
+            timeDateView.text = it
         }
         return root
     }
