@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 import first.android.cis.models.NewsListForAdd
 import first.android.cis.network.Retrofit
@@ -32,6 +33,8 @@ class AddNewsFragment : Fragment() {
             val discript = editDiscript.text.toString()
             addNews(heading,discript, editHeading, editDiscript)
         }
+        val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view)
+        navView.visibility = View.GONE
         return root
     }
     //TODO: Надо подумать стоит ли реализовывать кнопку "добавить" через init
