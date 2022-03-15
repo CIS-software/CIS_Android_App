@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 
 class OpenedNewsFragment: Fragment() {
@@ -38,6 +39,8 @@ class OpenedNewsFragment: Fragment() {
         mViewModel.openedTimeDate.observe(activity as LifecycleOwner){
             timeDateView.text = it
         }
+        val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view)
+        navView.visibility = View.GONE
         return root
     }
 

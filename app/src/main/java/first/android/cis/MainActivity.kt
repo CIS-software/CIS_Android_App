@@ -2,6 +2,7 @@ package first.android.cis
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -26,6 +27,6 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_profile))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
+        navView.visibility = View.GONE
     }
 }
