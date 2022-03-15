@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_regAuthFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_regAuthFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -73,4 +76,18 @@
             android:id="@+id/action_signInFragment_to_navigation_news"
             app:destination="@id/navigation_news" />
     </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="first.android.cis.ui.signUpIn.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpStep2Fragment"
+            app:destination="@id/signUpStep2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpStep2Fragment"
+        android:name="first.android.cis.ui.signUpIn.SignUpStep2Fragment"
+        android:label="fragment_sign_up_step2"
+        tools:layout="@layout/fragment_sign_up_step2" />
 </navigation>

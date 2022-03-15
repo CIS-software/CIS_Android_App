@@ -6,16 +6,11 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import first.android.cis.R
 
-class SignInFragment : Fragment() {
-
+class SignUpStep2Fragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -23,14 +18,8 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        val root = inflater.inflate(R.layout.fragment_sign_in, container, false)
-        val signInAppBTN: Button = root.findViewById(R.id.signInAppBTN)
-        val action = SignInFragmentDirections.actionSignInFragmentToNavigationNews()
-        signInAppBTN.setOnClickListener{
-            signInAppBTN.findNavController().navigate(action)
-        }
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-        return root
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_sign_up_step2, container, false)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
