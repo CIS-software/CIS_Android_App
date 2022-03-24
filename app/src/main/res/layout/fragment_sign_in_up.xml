@@ -6,14 +6,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.signUpIn.SignInUpFragment">
+    tools:context=".ui.signUpIn.SignInUpFragment"
+    android:background="#383838">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="112dp"
         android:layout_height="250dp"
         android:layout_marginTop="144dp"
-        android:src="@drawable/kyokushinkai"
+        android:src="@drawable/kyokushinkai_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,7 @@
         android:layout_marginBottom="20dp"
         android:text="@string/karate_salda"
         android:textAllCaps="true"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/fioTextView"
@@ -41,7 +42,7 @@
         android:layout_marginBottom="76dp"
         android:text="@string/fio_bartov"
         android:textAllCaps="true"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +51,7 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="220dp"
         android:background="@drawable/sign_in_up_view_style"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +65,7 @@
         android:id="@+id/signInButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_style"
+        android:background="@drawable/sign_edit_text_style"
         android:text="@string/sign_in"
         android:textAllCaps="false"
         android:textSize="20sp"
@@ -79,7 +80,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:background="@drawable/button_style"
+        android:background="@drawable/sign_edit_text_style"
         android:text="@string/sign_up"
         android:textAllCaps="false"
         android:textSize="20sp"

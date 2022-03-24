@@ -2,6 +2,7 @@ package first.android.cis.ui.news.openedNewsFragment
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
@@ -24,8 +25,11 @@ class DialogAskForDelete(private val newsId: Int) : DialogFragment() {
             .create()
 
     private fun deleteNews(){
+        //TODO: Добавить обработку ошибок от сервера
+        val sharedPreference =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
+        val accessToken = "Bearer " + sharedPreference.getString("access_token","empty_token")
         CoroutineScope(Dispatchers.Main).launch {
-            Retrofit.newsApi.deleteNews(newsId)
+            Retrofit.newsApi.deleteNews(newsId, accessToken)
         }
     }
 

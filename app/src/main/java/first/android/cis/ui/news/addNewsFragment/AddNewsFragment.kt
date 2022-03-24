@@ -1,5 +1,6 @@
 package first.android.cis.ui.news.addNewsFragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -44,9 +45,12 @@ class AddNewsFragment : Fragment() {
                         editDiscript: EditText){
         //TODO: Окно "Успех, запись добавлена" вылезит, даже если произойдет ошибка при запросе
         val newsList = NewsListForAdd(newsTitle = heading,
-            newsDescription = discript, newsPhoto = null , newsTimeDate = null)
+            newsDescription = discript, newsPhoto = "" , newsTimeDate = null)
+        //TODO: Надо сделать обработку ошибок от сервера
+        val sharedPreference =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
+        val accessToken = "Bearer " + sharedPreference.getString("access_token","empty_token")
         CoroutineScope(Dispatchers.Main).launch {
-            Retrofit.newsApi.addNews(newsList)
+            Retrofit.newsApi.addNews(newsList, accessToken)
         }
         DialogConfirmed().show(childFragmentManager, DialogConfirmed.TAG)
         editHeading.text = null

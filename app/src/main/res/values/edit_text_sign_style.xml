@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="edit_text_sign_style" parent="@android:style/Widget.EditText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

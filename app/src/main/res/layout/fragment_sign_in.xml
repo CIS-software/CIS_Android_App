@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.signUpIn.SignInFragment">
+    tools:context=".ui.signUpIn.SignInFragment"
+    android:background="@color/primary_dark_grey">
 
     <TextView
         android:id="@+id/karateTextView"
@@ -14,7 +15,7 @@
         android:text="@string/karate_salda"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fio_bartov"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,9 +33,9 @@
 
     <View
         android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="520dp"
-        android:background="@drawable/sign_in_up_view_light"
+        android:layout_width="0dp"
+        android:layout_height="430dp"
+        android:background="@drawable/sign_in_up_view_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -47,7 +48,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:background="#959595"
+        android:background="@drawable/sign_edit_text_style"
         android:text="@string/sign_in"
         android:textAllCaps="false"
         android:textSize="20sp"
@@ -56,6 +57,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -71,57 +73,54 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
         android:text="@string/e_mail"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/eMailEditText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <EditText
-        android:id="@+id/eMailEditText"
+        android:id="@+id/eMailEditTextSignIn"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/sign_edit_text_style"
-        android:textColor="@color/black"
         android:inputType="textEmailAddress"
-        android:textSize="20sp"
         android:padding="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="16dp"
         android:text="@string/password"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView5" />
+        app:layout_constraintStart_toStartOf="@+id/eMailEditTextSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/eMailEditTextSignIn" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/eMailEditText">
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/eMailEditTextSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:passwordToggleEnabled="true">
+
         <EditText
-            android:id="@+id/passwordEditTextSignUp"
+            android:id="@+id/passwordEditTextSignIn"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="228dp"
             android:background="@drawable/sign_edit_text_style"
             android:inputType="textPassword"
-            android:padding="12dp"/>
+            android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

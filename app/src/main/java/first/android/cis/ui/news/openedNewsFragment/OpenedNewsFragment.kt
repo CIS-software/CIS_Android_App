@@ -43,7 +43,7 @@ class OpenedNewsFragment: Fragment() {
         navView.visibility = View.GONE
         return root
     }
-
+    //TODO: Подумай стоит ли везде делать инит, я думаю, что надо делать инит там где на фрагменте много кнопок
     private fun initDeleteButton(root: View) {
         val deleteBtn: Button = root.findViewById(R.id.deleteNewsBTN)
         deleteBtn.setOnClickListener{

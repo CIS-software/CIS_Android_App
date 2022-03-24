@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape>
-            <solid android:color="#D3D3D3"/>
-            <corners
-                android:topLeftRadius="5dip"
-                android:topRightRadius="5dip"
-                android:bottomRightRadius="5dip"
-                android:bottomLeftRadius="5dip"/>
-        </shape>
-    </item>
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white"/>
+    <corners
+        android:topLeftRadius="10dip"
+        android:topRightRadius="10dip"
+        android:bottomRightRadius="10dip"
+        android:bottomLeftRadius="10dip"/>
+</shape>

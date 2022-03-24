@@ -1,6 +1,7 @@
 package first.android.cis.ui.news.mainNewsFragment
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -21,6 +22,7 @@ import first.android.cis.network.NewsRepository
 class NewsFragment : Fragment() {
     private val myAdapter by lazy{ NewsAdapter() }
     private lateinit var viewModel: NewsViewModel
+    private lateinit var viewModelFactory: NewsFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +44,9 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModelFactory = NewsFactory(repository = NewsRepository())
+        val sharedPreference =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
+        val accessToken = "Bearer " + sharedPreference.getString("access_token","empty_token")
+        viewModelFactory = NewsFactory(repository = NewsRepository(), accessToken)
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewsViewModel::class.java)
         viewModel.myNewsList.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
