@@ -12,4 +12,7 @@ object Retrofit {
 
     val newsApi: NewsApi =
         retrofit.create(NewsApi::class.java)
+
+    val usersApi: UsersApi =
+        retrofit.create(UsersApi::class.java)
 }

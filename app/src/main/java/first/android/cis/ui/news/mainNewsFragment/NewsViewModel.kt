@@ -9,14 +9,14 @@ import first.android.cis.network.NewsRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class NewsViewModel(private val repository: NewsRepository) : ViewModel() {
+class NewsViewModel(private val repository: NewsRepository, private val accessToken: String) : ViewModel() {
     private var repo = NewsRepository()
     val myNewsList: MutableLiveData<Response<NewsList>> = MutableLiveData()
 
     fun getNewsVM(){
         viewModelScope.launch {
             try{
-                myNewsList.value =  repo.getNewsRepo()
+                myNewsList.value =  repo.getNewsRepo(accessToken)
             }catch (exception: Exception){
                 Log.d("NETWORK ERROR", exception.toString() )
             }

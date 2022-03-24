@@ -89,5 +89,12 @@
         android:id="@+id/signUpStep2Fragment"
         android:name="first.android.cis.ui.signUpIn.SignUpStep2Fragment"
         android:label="fragment_sign_up_step2"
-        tools:layout="@layout/fragment_sign_up_step2" />
+        tools:layout="@layout/fragment_sign_up_step2">
+        <argument
+            android:name="Email"
+            app:argType="string"/>
+        <argument
+            android:name="Password"
+            app:argType="string"/>
+    </fragment>
 </navigation>
