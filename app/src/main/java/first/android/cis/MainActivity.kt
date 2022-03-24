@@ -1,9 +1,7 @@
 package first.android.cis
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
@@ -28,15 +26,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         navView.visibility = View.GONE
-
-
-        val sharedPreference =  getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
-        //val editor = sharedPreference.edit()
-        //editor.putString("token","Test")
-        //editor.putString("token","Test2")
-        //editor.apply()
-        //editor.clear().apply()
-        //Toast.makeText(this, "Тут из префа " + sharedPreference.all, Toast.LENGTH_LONG).show()
     }
 }
 

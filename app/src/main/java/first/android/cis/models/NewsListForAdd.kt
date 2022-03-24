@@ -14,5 +14,4 @@ data class NewsListForAdd(
 
     @SerializedName("time-date")
     val newsTimeDate: String?
-
 )

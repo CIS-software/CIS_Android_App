@@ -3,8 +3,6 @@ package first.android.cis.network
 import first.android.cis.models.NewsList
 import first.android.cis.models.NewsListForAdd
 import first.android.cis.models.NewsListItem
-import first.android.cis.models.users.UserToken
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 

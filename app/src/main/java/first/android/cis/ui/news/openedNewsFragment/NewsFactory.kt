@@ -1,7 +1,6 @@
 package first.android.cis.ui.news.openedNewsFragment
 
 import android.app.Application
-import androidx.annotation.NonNull
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 

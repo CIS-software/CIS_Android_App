@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 import first.android.cis.models.NewsListForAdd
@@ -66,9 +65,4 @@ class AddNewsFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-    companion object {
-        fun newInstance() = AddNewsFragment()
-    }
-
 }

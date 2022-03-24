@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-open class OpenedNewsViewModel(application: Application, private val newsHead: String,
+open class OpenedNewsViewModel(application: Application,
+                               private val newsHead: String,
                                private val newsDiscript: String,
                                private val newsTimeDate: String) : ViewModel() {
     private val _openedHeading = MutableLiveData<String>().apply{

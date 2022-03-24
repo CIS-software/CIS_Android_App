@@ -11,12 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import first.android.cis.R
 
-
 class SignInUpFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
@@ -38,5 +33,4 @@ class SignInUpFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.setShowHideAnimationEnabled(false)
         return root
     }
-
 }

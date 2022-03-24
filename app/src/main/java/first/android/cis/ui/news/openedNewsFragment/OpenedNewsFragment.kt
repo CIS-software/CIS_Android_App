@@ -60,9 +60,4 @@ class OpenedNewsFragment: Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-    companion object {
-        fun newInstance() = OpenedNewsFragment()
-    }
-
 }

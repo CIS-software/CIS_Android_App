@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.navigation.findNavController
 import first.android.cis.R
 import first.android.cis.models.users.AuthData
@@ -24,11 +23,6 @@ import retrofit2.Response
 
 class SignInFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +30,6 @@ class SignInFragment : Fragment() {
         setHasOptionsMenu(true)
         val root = inflater.inflate(R.layout.fragment_sign_in, container, false)
         val signInAppBTN: Button = root.findViewById(R.id.signInAppBTN)
-        //val action = SignInFragmentDirections.actionSignInFragmentToNavigationNews()
         signInAppBTN.setOnClickListener{
             val emailEditText: EditText = root.findViewById(R.id.eMailEditTextSignIn)
             val passwordEditText: EditText = root.findViewById(R.id.passwordEditTextSignIn)
@@ -62,7 +55,6 @@ class SignInFragment : Fragment() {
                         editor.putString("refresh_token",tokens.refreshToken)
                         editor.apply()
                         signInAppBTN.findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToNavigationNews())
-                        //Toast.makeText(activity, "Тут из префа " + sharedPreference.getString("access_token","Ошибка! Нет токена!"), Toast.LENGTH_LONG).show()
                     }
                 }
             }
