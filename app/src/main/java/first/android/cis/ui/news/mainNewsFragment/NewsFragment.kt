@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -17,10 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
+import first.android.cis.databinding.FragmentNewsBinding
 import first.android.cis.network.NewsRepository
 
 class NewsFragment : Fragment() {
     private val myAdapter by lazy{ NewsAdapter() }
+    private var _binding: FragmentNewsBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var addNewsButton: Button
     private lateinit var viewModel: NewsViewModel
     private lateinit var viewModelFactory: NewsFactory
 
@@ -28,18 +31,20 @@ class NewsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View?
+    ): View
     {
+        _binding = FragmentNewsBinding.inflate(inflater,container,false)
+        binding.let{
+            addNewsButton = it.addNewsButton
+        }
         val actionAddNews = NewsFragmentDirections.actionNavigationNewsToAddNewsFragment()
-        val root = inflater.inflate(R.layout.fragment_news, container, false)
-        val addNewsButton: Button = root.findViewById(R.id.add_news_button)
+        val navView: BottomNavigationView = requireActivity().findViewById(R.id.navView)
         addNewsButton.setOnClickListener{
             addNewsButton.findNavController().navigate(actionAddNews)
         }
-        val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view)
         navView.visibility = View.VISIBLE
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,5 +72,10 @@ class NewsFragment : Fragment() {
         recyclerNews.layoutManager = LinearLayoutManager(activity)
         recyclerNews.adapter = myAdapter
         myAdapter.notifyDataSetChanged()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

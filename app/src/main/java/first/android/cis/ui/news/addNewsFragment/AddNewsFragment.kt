@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
+import first.android.cis.databinding.AddNewsFragmentBinding
 import first.android.cis.models.NewsListForAdd
 import first.android.cis.network.Retrofit
 import kotlinx.coroutines.CoroutineScope
@@ -19,42 +19,48 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AddNewsFragment : Fragment() {
+    private var _binding: AddNewsFragmentBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var postNewsButton: Button
+    private lateinit var inputHeadingEditT: EditText
+    private lateinit var inputDiscriptEditT: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setHasOptionsMenu(true)
-        val root = inflater.inflate(R.layout.add_news_fragment, container, false)
-        val postNewsButton: Button = root.findViewById(R.id.post_news_butt)
-        val editHeading: EditText = root.findViewById(R.id.inputHeadingEditT)
-        val editDiscript: EditText = root.findViewById(R.id.inputDiscriptEditT)
-        postNewsButton.setOnClickListener{
-            val heading = editHeading.text.toString()
-            val discript = editDiscript.text.toString()
-            addNews(heading,discript, editHeading, editDiscript)
+        _binding = AddNewsFragmentBinding.inflate(inflater, container, false)
+        binding.let{
+            postNewsButton = it.postNewsButton
+            inputHeadingEditT = it.inputHeadingEditT
+            inputDiscriptEditT = it.inputDiscriptEditT
         }
-        val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view)
+        postNewsButton.setOnClickListener{
+            val heading = inputHeadingEditT.text.toString()
+            val discript = inputDiscriptEditT.text.toString()
+            addNews(heading,discript, inputHeadingEditT, inputDiscriptEditT)
+        }
+        val navView: BottomNavigationView = requireActivity().findViewById(R.id.navView)
         navView.visibility = View.GONE
-        return root
+        return binding.root
     }
-    //TODO: Надо подумать стоит ли реализовывать кнопку "добавить" через init
+
     private fun addNews(heading: String,
                         discript: String,
-                        editHeading: EditText,
-                        editDiscript: EditText){
+                        inputHeadingEditT: EditText,
+                        inputDiscriptEditT: EditText){
         //TODO: Окно "Успех, запись добавлена" вылезит, даже если произойдет ошибка при запросе
         val newsList = NewsListForAdd(newsTitle = heading,
             newsDescription = discript, newsPhoto = "" , newsTimeDate = null)
-        //TODO: Надо сделать обработку ошибок от сервера
         val sharedPreference =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
         val accessToken = "Bearer " + sharedPreference.getString("access_token","empty_token")
         CoroutineScope(Dispatchers.Main).launch {
             Retrofit.newsApi.addNews(newsList, accessToken)
         }
         DialogConfirmed().show(childFragmentManager, DialogConfirmed.TAG)
-        editHeading.text = null
-        editDiscript.text = null
+        inputHeadingEditT.text = null
+        inputDiscriptEditT.text = null
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -67,8 +73,8 @@ class AddNewsFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    companion object {
-        fun newInstance() = AddNewsFragment()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
 }

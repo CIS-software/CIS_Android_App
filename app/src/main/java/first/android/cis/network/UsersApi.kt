@@ -5,7 +5,6 @@ import first.android.cis.models.users.UserInfo
 import first.android.cis.models.users.UserToken
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface UsersApi {
@@ -15,9 +14,6 @@ interface UsersApi {
     @POST("/create-user-auth")
     suspend fun createUserAuth(@Body authData: AuthData)
 
-    //TODO: тут приходит еще ответ от сервера
     @POST("/login")
     fun signIn(@Body authData: AuthData): Call<UserToken>
-
-
 }

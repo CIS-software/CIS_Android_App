@@ -1,6 +1,5 @@
 package first.android.cis.network
 
-import android.util.Log
 import first.android.cis.models.NewsList
 import retrofit2.Response
 
