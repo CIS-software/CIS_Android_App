@@ -14,9 +14,6 @@ interface UsersApi {
     @POST("/create-user-auth")
     suspend fun createUserAuth(@Body authData: AuthData)
 
-    //TODO: тут приходит еще ответ от сервера
     @POST("/login")
     fun signIn(@Body authData: AuthData): Call<UserToken>
-
-
 }

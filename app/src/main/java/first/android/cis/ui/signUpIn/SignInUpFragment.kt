@@ -10,27 +10,40 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import first.android.cis.R
+import first.android.cis.databinding.FragmentSignInUpBinding
+import first.android.cis.databinding.FragmentSignUpBinding
 
 class SignInUpFragment : Fragment() {
+    private var _binding: FragmentSignInUpBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var signInButton: Button
+    private lateinit var signUpButton: Button
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_sign_in_up, container, false)
-        val signInBTN: Button = root.findViewById(R.id.signInButton)
-        val signUpBTN: Button = root.findViewById(R.id.signUpButton)
+    ): View {
+        _binding = FragmentSignInUpBinding.inflate(inflater, container, false)
+        binding.let{
+            signInButton = it.signInButton
+            signUpButton = it.signUpButton
+        }
         val toSignInFragment = SignInUpFragmentDirections.actionRegAuthFragmentToSignInFragment()
         val toSignUpFragment = SignInUpFragmentDirections.actionRegAuthFragmentToSignUpFragment()
-        signInBTN.setOnClickListener{
-            signInBTN.findNavController().navigate(toSignInFragment)
+        signInButton.setOnClickListener{
+            signInButton.findNavController().navigate(toSignInFragment)
         }
-        signUpBTN.setOnClickListener{
-            signUpBTN.findNavController().navigate(toSignUpFragment)
+        signUpButton.setOnClickListener{
+            signUpButton.findNavController().navigate(toSignUpFragment)
         }
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         (activity as AppCompatActivity?)!!.supportActionBar!!.setShowHideAnimationEnabled(false)
-        return root
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -9,8 +9,10 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import first.android.cis.R
+import first.android.cis.databinding.FragmentSignUpStep2Binding
 import first.android.cis.models.users.AuthData
 import first.android.cis.network.Retrofit
+import kotlinx.android.synthetic.main.fragment_sign_up_step2.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,29 +21,39 @@ import java.util.*
 class SignUpStep2Fragment : Fragment() {
     private val args: SignUpStep2FragmentArgs by navArgs()
     lateinit var selectedItem: String
+    private var _binding: FragmentSignUpStep2Binding? = null
+    private val binding get() = _binding!!
+    private lateinit var endSignUpButton: Button
+    private lateinit var datePickerBtn: Button
+    private lateinit var testTV: TextView
+    private lateinit var nameEditTextSignUp: EditText
+    private lateinit var surnameEditSignUp: EditText
+    private lateinit var spinnerTown: Spinner
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        setHasOptionsMenu(true)
-        val root = inflater.inflate(R.layout.fragment_sign_up_step2, container, false)
-        val signUpBtn: Button = root.findViewById(R.id.endSignUpButton)
-        val datePickerBtn: Button = root.findViewById(R.id.datePickerBtn)
-        val testTV: TextView = root.findViewById(R.id.testTV) //TODO: Убрать тестовый текствью
-        val nameEditText: EditText = root.findViewById(R.id.nameEditTextSignUp)
-        val surnameEditText: EditText = root.findViewById(R.id.surnameEditSignUp)
-        signUpBtn.setOnClickListener{
+    ): View {
+        _binding = FragmentSignUpStep2Binding.inflate(inflater, container, false)
+        binding.let{
+            endSignUpButton = it.endSignUpButton
+            datePickerBtn = it.datePickerBtn
+            testTV = it.testTV
+            nameEditTextSignUp = it.nameEditTextSignUp
+            surnameEditSignUp = it.surnameEditSignUp
+            spinnerTown = it.spinnerTown
+        }
+        endSignUpButton.setOnClickListener{
             val authData = AuthData(args.email, args.password)
             CoroutineScope(Dispatchers.Main).launch {
                 Retrofit.usersApi.createUserAuth(authData)
             }
         }
-        datePickerConfig(datePickerBtn, testTV, root)
-        return root
+        datePickerConfig()
+        return binding.root
     }
 
-    private fun datePickerConfig(datePickerBtn: Button, testTV: TextView, root: View) {
+    private fun datePickerConfig() {
         //Calendar
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -56,11 +68,10 @@ class SignUpStep2Fragment : Fragment() {
                 }, year, month, day)
             datePickerDialog.show()
         }
-        spinnerConfig(root)
+        spinnerConfig()
     }
 
-    private fun spinnerConfig(root: View) {
-        val spinner: Spinner = root.findViewById(R.id.spinnerTown)
+    private fun spinnerConfig() {
         //Создаем адаптер для спиннера
         val spinnerAdapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(
             requireActivity(),
@@ -68,14 +79,19 @@ class SignUpStep2Fragment : Fragment() {
             R.layout.my_spinner
         )
         spinnerAdapter.setDropDownViewResource(R.layout.my_spinner)
-        spinner.adapter = spinnerAdapter
+        spinnerTown.adapter = spinnerAdapter
         //Обработка выбора значения в спинере
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spinnerTown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 selectedItem = parent.getItemAtPosition(pos).toString()
             }
             override fun onNothingSelected(parent: AdapterView<out Adapter>?) {
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

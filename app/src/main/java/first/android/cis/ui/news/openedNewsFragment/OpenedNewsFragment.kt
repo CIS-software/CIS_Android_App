@@ -11,44 +11,49 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
+import first.android.cis.databinding.OpenedNewsFragmentBinding
 
 class OpenedNewsFragment: Fragment() {
+    private var _binding: OpenedNewsFragmentBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var oppenedNewsHeading: TextView
+    private lateinit var oppenedNewsDiscript: TextView
+    private lateinit var oppenedTimeDate: TextView
+    private lateinit var deleteNewsBTN: Button
     private lateinit var mViewModel: OpenedNewsViewModel
     private val args: OpenedNewsFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setHasOptionsMenu(true)
-        val root = inflater.inflate(R.layout.opened_news_fragment, container, false)
-        val headingView: TextView = root.findViewById(R.id.oppenedNewsHeading)
-        val discriptionView: TextView = root.findViewById(R.id.oppenedNewsDiscript)
-        val timeDateView: TextView = root.findViewById(R.id.oppenedTimeDate)
-        initDeleteButton(root)
+        _binding = OpenedNewsFragmentBinding.inflate(inflater, container, false)
+        binding.let{
+            oppenedNewsHeading = it.oppenedNewsHeading
+            oppenedNewsDiscript = it.oppenedNewsDiscript
+            oppenedTimeDate = it.oppenedTimeDate
+            deleteNewsBTN = it.deleteNewsBTN
+        }
+        deleteNewsBTN.setOnClickListener{
+            DialogAskForDelete(args.id).show(childFragmentManager, DialogAskForDelete.TAG)
+        }
         mViewModel = ViewModelProvider(this, NewsFactory(application = Application(),
             newsHeading = args.heading,
             newsDiscript = args.discription,
             newsTimeDate = args.dateTime))
             .get(OpenedNewsViewModel::class.java)
         mViewModel.openedHeading.observe(activity as LifecycleOwner) {
-            headingView.text = it
+            oppenedNewsHeading.text = it
         }
         mViewModel.openedDiscript.observe(activity as LifecycleOwner) {
-            discriptionView.text = it
+            oppenedNewsDiscript.text = it
         }
         mViewModel.openedTimeDate.observe(activity as LifecycleOwner){
-            timeDateView.text = it
+            oppenedTimeDate.text = it
         }
-        val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view)
+        val navView: BottomNavigationView = requireActivity().findViewById(R.id.navView)
         navView.visibility = View.GONE
-        return root
-    }
-    //TODO: Подумай стоит ли везде делать инит, я думаю, что надо делать инит там где на фрагменте много кнопок
-    private fun initDeleteButton(root: View) {
-        val deleteBtn: Button = root.findViewById(R.id.deleteNewsBTN)
-        deleteBtn.setOnClickListener{
-            DialogAskForDelete(args.id).show(childFragmentManager, DialogAskForDelete.TAG)
-        }
+        return binding.root
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -59,5 +64,10 @@ class OpenedNewsFragment: Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

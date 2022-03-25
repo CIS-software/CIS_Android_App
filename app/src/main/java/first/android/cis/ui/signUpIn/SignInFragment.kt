@@ -11,34 +11,45 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.navigation.findNavController
 import first.android.cis.R
+import first.android.cis.databinding.FragmentSignInBinding
+import first.android.cis.databinding.FragmentSignUpStep2Binding
 import first.android.cis.models.users.AuthData
 import first.android.cis.models.users.UserToken
 import first.android.cis.network.Retrofit
+import kotlinx.android.synthetic.main.fragment_sign_in.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.sign
 
 class SignInFragment : Fragment() {
+    private var _binding: FragmentSignInBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var signInAppBTN: Button
+    private lateinit var eMailEditTextSignIn: EditText
+    private lateinit var passwordEditTextSignIn: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        setHasOptionsMenu(true)
-        val root = inflater.inflate(R.layout.fragment_sign_in, container, false)
-        val signInAppBTN: Button = root.findViewById(R.id.signInAppBTN)
+    ): View {
+        _binding = FragmentSignInBinding.inflate(inflater, container, false)
+        binding.let{
+            signInAppBTN = it.signInAppBTN
+            eMailEditTextSignIn = it.eMailEditTextSignIn
+            passwordEditTextSignIn = it.passwordEditTextSignIn
+
+        }
         signInAppBTN.setOnClickListener{
-            val emailEditText: EditText = root.findViewById(R.id.eMailEditTextSignIn)
-            val passwordEditText: EditText = root.findViewById(R.id.passwordEditTextSignIn)
-            val authData = AuthData(emailEditText.text.toString(), passwordEditText.text.toString())
+            val authData = AuthData(eMailEditTextSignIn.text.toString(), passwordEditTextSignIn.text.toString())
             CoroutineScope(Dispatchers.Main).launch {
                 loginUser(authData, signInAppBTN)
             }
         }
-        return root
+        return binding.root
     }
 
     private fun loginUser(userAuth: AuthData, signInAppBTN: Button){
@@ -61,13 +72,8 @@ class SignInFragment : Fragment() {
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                activity?.onBackPressed()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <Button
-        android:id="@+id/post_news_butt"
+        android:id="@+id/postNewsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Добавить новость"
