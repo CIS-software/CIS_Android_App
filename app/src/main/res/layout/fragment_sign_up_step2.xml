@@ -20,17 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fioTextView"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:text="@string/fio_bartov"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/karateTextView" />
-
     <View
         android:id="@+id/view2"
         android:layout_width="0dp"
@@ -39,7 +28,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fioTextView"
+        app:layout_constraintTop_toBottomOf="@+id/karateTextView"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -57,7 +46,7 @@
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/userNameTextView"
         style="@style/text_view_sign_style"
         android:layout_marginTop="4dp"
         android:text="Ваше имя"
@@ -72,10 +61,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/userSurnameTextView"
         style="@style/text_view_sign_style"
         android:layout_marginTop="16dp"
         android:text="Ваша фамилия"
@@ -87,11 +76,11 @@
         style="@style/edit_text_sign_style"
         android:layout_marginTop="8dp"
         android:background="@drawable/sign_edit_text_style"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintStart_toStartOf="@+id/userSurnameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/userSurnameTextView" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/townTextView"
         style="@style/text_view_sign_style"
         android:layout_marginTop="16dp"
         android:text="Город, в котором хотите заниматься"
@@ -106,11 +95,11 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/sign_edit_text_style"
         android:entries="@array/towns"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"/>
+        app:layout_constraintStart_toStartOf="@+id/townTextView"
+        app:layout_constraintTop_toBottomOf="@+id/townTextView"/>
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/dateTextView"
         style="@style/text_view_sign_style"
         android:layout_marginTop="16dp"
         android:text="Дата рождения"
@@ -124,21 +113,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Выбрать дату рождения"
+        android:gravity="left|center_vertical"
+        android:padding="12dp"
         android:textAllCaps="false"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-
-    <TextView
-        android:id="@+id/testTV"
-        style="@style/text_view_sign_style"
-        android:layout_marginBottom="32dp"
-        android:text="Тут дата"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
-        app:layout_constraintStart_toEndOf="@+id/textView11" />
+        android:textSize="19sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/dateTextView"
+        app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/endSignUpButton"

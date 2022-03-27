@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.navigation.findNavController
-import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment() {
@@ -17,6 +17,8 @@ class SignUpFragment : Fragment() {
     private lateinit var nextBtnSignUp: Button
     private lateinit var passwordEditTextSignUp: EditText
     private lateinit var emailEditTextSignUp: EditText
+    private lateinit var emailTextView: TextView
+    private lateinit var passwordTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,13 +29,18 @@ class SignUpFragment : Fragment() {
             nextBtnSignUp = it.nextBtnSignUp
             passwordEditTextSignUp = it.passwordEditTextSignUp
             emailEditTextSignUp = it.emailEditTextSignUp
+            emailTextView = it.emailTextView
+            passwordTextView = it.passwordTextView
         }
         nextBtnSignUp.setOnClickListener{
             val email: String = emailEditTextSignUp.text.toString()
             val password: String = passwordEditTextSignUp.text.toString()
-            val moveToStep2 = SignUpFragmentDirections.actionSignUpFragmentToSignUpStep2Fragment(
-                email, password)
-            nextBtnSignUp.findNavController().navigate(moveToStep2)
+            val checkAuthData = CheckInputData()
+            if (checkAuthData.checkAuthData(email, password, emailTextView, passwordTextView, activity)){
+                val moveToStep2 = SignUpFragmentDirections.actionSignUpFragmentToSignUpStep2Fragment(
+                    email, password)
+                nextBtnSignUp.findNavController().navigate(moveToStep2)
+            }
         }
         return binding.root
     }

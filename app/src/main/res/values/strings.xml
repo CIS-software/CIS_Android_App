@@ -6,13 +6,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="karate_salda">Карате Салда</string>
-    <string name="fio_bartov">Бартов Сергей Иванович</string>
     <string name="sign_in">Вход</string>
     <string name="sign_up">Регистрация</string>
     <string name="phone_number">Номер телефона</string>
     <string name="password">Пароль</string>
     <string name="e_mail">Электронная почта</string>
     <string-array name="towns">
+        <item>Выбрать город</item>
         <item>Верхняя Салда</item>
         <item>Нижняя Салда</item>
     </string-array>
