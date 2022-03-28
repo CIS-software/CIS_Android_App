@@ -51,8 +51,6 @@ class OpenedNewsFragment: Fragment() {
         mViewModel.openedTimeDate.observe(activity as LifecycleOwner){
             oppenedTimeDate.text = it
         }
-        val navView: BottomNavigationView = requireActivity().findViewById(R.id.navView)
-        navView.visibility = View.GONE
         return binding.root
     }
 

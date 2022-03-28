@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpStep2Binding
+import first.android.cis.models.users.AuthData
 import first.android.cis.models.users.UserInfo
-import first.android.cis.network.Retrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,6 +37,7 @@ class SignUpStep2Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentSignUpStep2Binding.inflate(inflater, container, false)
         binding.let{
             endSignUpButton = it.endSignUpButton
@@ -62,7 +63,10 @@ class SignUpStep2Fragment : Fragment() {
                     selectedItem, dateOfBirth
                 )
                 CoroutineScope(Dispatchers.Main).launch {
-                    Retrofit.usersApi.createUserInfo(userInfo)
+                    val authData = AuthData(userInfo.eMail, userInfo.password)
+                    val signUpService = SignUpService()
+                    val actionNavigate = SignUpStep2FragmentDirections.actionSignUpStep2FragmentToNavigationNews()
+                    signUpService.signUp(userInfo, requireActivity(), authData, endSignUpButton, actionNavigate)
                 }
             }
         }
