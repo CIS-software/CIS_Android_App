@@ -10,13 +10,18 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 import first.android.cis.databinding.FragmentNewsBinding
 import first.android.cis.network.NewsRepository
+import first.android.cis.ui.signUpIn.SignInFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class NewsFragment : Fragment() {
@@ -26,7 +31,6 @@ class NewsFragment : Fragment() {
     private lateinit var addNewsButton: Button
     private lateinit var viewModel: NewsViewModel
     private lateinit var viewModelFactory: NewsFactory
-    private var pressedTime: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +39,6 @@ class NewsFragment : Fragment() {
     ): View
     {
         val actionAddNews = NewsFragmentDirections.actionNavigationNewsToAddNewsFragment()
-        //val navView: BottomNavigationView = requireActivity().findViewById(R.id.navView)
         _binding = FragmentNewsBinding.inflate(inflater,container,false)
         binding.let{
             addNewsButton = it.addNewsButton
@@ -43,7 +46,8 @@ class NewsFragment : Fragment() {
         addNewsButton.setOnClickListener{
             addNewsButton.findNavController().navigate(actionAddNews)
         }
-
+        val navView: BottomNavigationView? = activity?.findViewById(R.id.navView)
+        navView?.visibility = View.VISIBLE
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         return binding.root
     }
@@ -74,7 +78,6 @@ class NewsFragment : Fragment() {
         recyclerNews.adapter = myAdapter
         myAdapter.notifyDataSetChanged()
     }
-    //TODO: Надо сделать onBackPressed на него назначить выходи из приложения
 
     override fun onDestroyView() {
         super.onDestroyView()

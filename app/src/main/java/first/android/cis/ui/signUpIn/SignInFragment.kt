@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import first.android.cis.databinding.FragmentSignInBinding
 import first.android.cis.models.users.AuthData
 import kotlinx.coroutines.CoroutineScope
