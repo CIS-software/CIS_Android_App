@@ -9,15 +9,18 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignInUpBinding
 import first.android.cis.databinding.FragmentSignUpBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class SignInUpFragment : Fragment() {
     private var _binding: FragmentSignInUpBinding? = null
     private val binding get() = _binding!!
     private lateinit var signInButton: Button
     private lateinit var signUpButton: Button
+    private lateinit var navigationView: BottomNavigationView
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(

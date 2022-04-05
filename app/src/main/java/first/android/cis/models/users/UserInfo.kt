@@ -3,18 +3,21 @@ package first.android.cis.models.users
 import com.google.gson.annotations.SerializedName
 
 data class UserInfo(
-    @SerializedName("name")
+    @SerializedName("Email")
+    val eMail: String,
+
+    @SerializedName("Password")
+    val password: String,
+
+    @SerializedName("Name")
     val userName: String,
 
-    @SerializedName("surname")
+    @SerializedName("Surname")
     val userSurname: String,
 
-    @SerializedName("patronomyc")
-    val userPatronomyc: String,
-
-    @SerializedName("town")
+    @SerializedName("Town")
     val userTown: String,
 
-    @SerializedName("age")
-    val userAge: Int
+    @SerializedName("Age")
+    val userAge: String
 )

@@ -41,8 +41,6 @@ class AddNewsFragment : Fragment() {
             val discript = inputDiscriptEditT.text.toString()
             addNews(heading,discript, inputHeadingEditT, inputDiscriptEditT)
         }
-        val navView: BottomNavigationView = requireActivity().findViewById(R.id.navView)
-        navView.visibility = View.GONE
         return binding.root
     }
 

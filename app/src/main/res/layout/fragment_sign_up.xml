@@ -19,17 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fioTextView"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:text="@string/fio_bartov"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/karateTextView" />
-
     <View
         android:id="@+id/view2"
         android:layout_width="0dp"
@@ -39,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fioTextView"
+        app:layout_constraintTop_toBottomOf="@+id/karateTextView"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -69,7 +58,7 @@
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/emailTextView"
         style="@style/text_view_sign_style"
         android:layout_marginTop="36dp"
         android:text="@string/e_mail"
@@ -84,10 +73,10 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/passwordTextView"
         style="@style/text_view_sign_style"
         android:layout_marginTop="16dp"
         android:text="@string/password"
@@ -101,7 +90,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
         app:passwordToggleEnabled="true">
 
         <EditText

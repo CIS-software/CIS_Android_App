@@ -11,8 +11,7 @@ import androidx.navigation.fragment.navArgs
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpStep2Binding
 import first.android.cis.models.users.AuthData
-import first.android.cis.network.Retrofit
-import kotlinx.android.synthetic.main.fragment_sign_up_step2.*
+import first.android.cis.models.users.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,32 +20,54 @@ import java.util.*
 class SignUpStep2Fragment : Fragment() {
     private val args: SignUpStep2FragmentArgs by navArgs()
     lateinit var selectedItem: String
+    private var dateOfBirth: String = ""
     private var _binding: FragmentSignUpStep2Binding? = null
     private val binding get() = _binding!!
     private lateinit var endSignUpButton: Button
     private lateinit var datePickerBtn: Button
-    private lateinit var testTV: TextView
     private lateinit var nameEditTextSignUp: EditText
     private lateinit var surnameEditSignUp: EditText
     private lateinit var spinnerTown: Spinner
+    private lateinit var userNameTextView: TextView
+    private lateinit var userSurnameTextView: TextView
+    private lateinit var townTextView: TextView
+    private lateinit var dateTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentSignUpStep2Binding.inflate(inflater, container, false)
         binding.let{
             endSignUpButton = it.endSignUpButton
             datePickerBtn = it.datePickerBtn
-            testTV = it.testTV
             nameEditTextSignUp = it.nameEditTextSignUp
             surnameEditSignUp = it.surnameEditSignUp
             spinnerTown = it.spinnerTown
+            userNameTextView = it.userNameTextView
+            userSurnameTextView = it.userSurnameTextView
+            townTextView = it.townTextView
+            dateTextView = it.dateTextView
         }
         endSignUpButton.setOnClickListener{
-            val authData = AuthData(args.email, args.password)
-            CoroutineScope(Dispatchers.Main).launch {
-                Retrofit.usersApi.createUserAuth(authData)
+            val userName: String = nameEditTextSignUp.text.toString()
+            val userSurname: String = surnameEditSignUp.text.toString()
+            val checkInputData = CheckInputData()
+            if (checkInputData.checkUserInfo(userName, userSurname,
+                    userNameTextView, userSurnameTextView, activity,
+                    dateOfBirth, selectedItem, townTextView, dateTextView)){
+                val userInfo = UserInfo(args.email, args.password,
+                    nameEditTextSignUp.text.toString(),
+                    surnameEditSignUp.text.toString(),
+                    selectedItem, dateOfBirth
+                )
+                CoroutineScope(Dispatchers.Main).launch {
+                    val authData = AuthData(userInfo.eMail, userInfo.password)
+                    val signUpService = SignUpService()
+                    val actionNavigate = SignUpStep2FragmentDirections.actionSignUpStep2FragmentToNavigationNews()
+                    signUpService.signUp(userInfo, requireActivity(), authData, endSignUpButton, actionNavigate)
+                }
             }
         }
         datePickerConfig()
@@ -64,7 +85,10 @@ class SignUpStep2Fragment : Fragment() {
             val datePickerDialog = DatePickerDialog(requireContext(),
                 R.style.ScrollingDatePicker,
                 DatePickerDialog.OnDateSetListener{ _, myYear, myMonth, myDay ->
-                    testTV.text = "$myDay/$myMonth/$myYear"
+                    var monthDate = myMonth
+                    monthDate += 1
+                    dateOfBirth = "$myDay/$monthDate/$myYear"
+                    datePickerBtn.text = dateOfBirth
                 }, year, month, day)
             datePickerDialog.show()
         }

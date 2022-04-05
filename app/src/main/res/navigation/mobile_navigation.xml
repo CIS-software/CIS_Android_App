@@ -29,14 +29,19 @@
         android:id="@+id/navigation_profile"
         android:name="first.android.cis.ui.profile.ProfileFragment"
         android:label="Профиль"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_regAuthFragment"
+            app:destination="@id/regAuthFragment"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/openedNews"
         android:name="first.android.cis.ui.news.openedNewsFragment.OpenedNewsFragment"
         android:label="Запись"
-        tools:layout="@layout/opened_news_fragment"
-        >
+        tools:layout="@layout/opened_news_fragment">
         <argument
             android:name="Id"
             app:argType="integer"/>
@@ -62,7 +67,8 @@
         tools:layout="@layout/fragment_sign_in_up" >
         <action
             android:id="@+id/action_regAuthFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            />
         <action
             android:id="@+id/action_regAuthFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -74,7 +80,9 @@
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_navigation_news"
-            app:destination="@id/navigation_news" />
+            app:destination="@id/navigation_news"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -96,5 +104,10 @@
         <argument
             android:name="Password"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_signUpStep2Fragment_to_navigation_news"
+            app:destination="@id/navigation_news"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

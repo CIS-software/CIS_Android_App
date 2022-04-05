@@ -20,17 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/fioTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fio_bartov"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/karateTextView" />
-
     <View
         android:id="@+id/view2"
         android:layout_width="0dp"
@@ -39,9 +28,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fioTextView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signInAppBTN"
@@ -70,7 +57,7 @@
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -91,11 +78,11 @@
         android:padding="12dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toStartOf="@+id/emailTextView"
+        app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/passwordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -111,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/eMailEditTextSignIn"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
         app:passwordToggleEnabled="true">
 
         <EditText
