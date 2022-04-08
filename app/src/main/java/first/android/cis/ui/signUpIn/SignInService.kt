@@ -31,12 +31,11 @@ class SignInService {
                     if (tokens != null){
                         val sharedPreference =  requireActivity.getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
                         val editor = sharedPreference.edit()
-                        val mainActivity: MainActivity = requireActivity as MainActivity
                         editor.putString("access_token",tokens.accessToken)
                         editor.putString("refresh_token",tokens.refreshToken)
+                        editor.putInt("userId",tokens.userId)
                         editor.apply()
                         signInAppBTN.findNavController().navigate(navigateAction)
-                        //mainActivity.setStartDestination()
                     }
                 }
             }

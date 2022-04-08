@@ -11,6 +11,7 @@
     <string name="phone_number">Номер телефона</string>
     <string name="password">Пароль</string>
     <string name="e_mail">Электронная почта</string>
+    <string name="error">Ошибка</string>
     <string-array name="towns">
         <item>Выбрать город</item>
         <item>Верхняя Салда</item>
