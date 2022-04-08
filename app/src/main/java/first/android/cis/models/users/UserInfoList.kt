@@ -1,3 +1,3 @@
 package first.android.cis.models.users
 
-data class UserInfoList()
+class UserInfoList : ArrayList<UserInfo>()

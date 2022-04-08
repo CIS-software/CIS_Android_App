@@ -2,7 +2,7 @@ package first.android.cis.models.users
 
 import com.google.gson.annotations.SerializedName
 
-data class UserInfo(
+data class UserSignInfo(
     @SerializedName("Email")
     val eMail: String,
 

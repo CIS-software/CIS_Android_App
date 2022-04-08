@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpStep2Binding
 import first.android.cis.models.users.AuthData
-import first.android.cis.models.users.UserInfo
+import first.android.cis.models.users.UserSignInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +57,7 @@ class SignUpStep2Fragment : Fragment() {
             if (checkInputData.checkUserInfo(userName, userSurname,
                     userNameTextView, userSurnameTextView, activity,
                     dateOfBirth, selectedItem, townTextView, dateTextView)){
-                val userInfo = UserInfo(args.email, args.password,
+                val userInfo = UserSignInfo(args.email, args.password,
                     nameEditTextSignUp.text.toString(),
                     surnameEditSignUp.text.toString(),
                     selectedItem, dateOfBirth
