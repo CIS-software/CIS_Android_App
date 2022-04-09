@@ -1,4 +1,4 @@
-package first.android.cis.ui.signUpIn
+package first.android.cis.presentation.signUpIn
 
 import android.graphics.Color
 import android.widget.TextView

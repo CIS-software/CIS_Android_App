@@ -1,4 +1,4 @@
-package first.android.cis.ui.signUpIn
+package first.android.cis.presentation.signUpIn.signUp
 
 import android.widget.Button
 import android.widget.Toast
@@ -7,6 +7,7 @@ import androidx.navigation.NavDirections
 import first.android.cis.models.users.AuthData
 import first.android.cis.models.users.UserSignInfo
 import first.android.cis.network.Retrofit
+import first.android.cis.presentation.signUpIn.signIn.SignInService
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
