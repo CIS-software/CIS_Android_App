@@ -1,4 +1,4 @@
-package first.android.cis.ui.signUpIn
+package first.android.cis.presentation.signUpIn.signIn
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import first.android.cis.databinding.FragmentSignInBinding
-import first.android.cis.models.users.AuthData
+import first.android.cis.domain.models.user.AuthData
+import first.android.cis.network.services.SignInService
+import first.android.cis.domain.signUpIn.CheckInputData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

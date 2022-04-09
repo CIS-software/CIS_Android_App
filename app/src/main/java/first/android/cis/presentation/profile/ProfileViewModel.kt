@@ -1,12 +1,11 @@
-package first.android.cis.ui.profile
+package first.android.cis.presentation.profile
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import first.android.cis.models.users.UserInfo
-import first.android.cis.models.users.UserInfoList
-import first.android.cis.network.UserRepository
+import first.android.cis.domain.models.user.UserInfo
+import first.android.cis.data.userRepository.UserRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception

@@ -1,7 +1,7 @@
-package first.android.cis.network
+package first.android.cis.data.userRepository
 
-import first.android.cis.models.users.UserInfo
-import first.android.cis.models.users.UserInfoList
+import first.android.cis.domain.models.user.UserInfo
+import first.android.cis.network.Retrofit
 import retrofit2.Response
 
 class UserRepository {

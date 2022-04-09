@@ -1,4 +1,4 @@
-package first.android.cis.ui.calendar
+package first.android.cis.presentation.calendar
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

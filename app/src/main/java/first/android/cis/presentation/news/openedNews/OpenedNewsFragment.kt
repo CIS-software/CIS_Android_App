@@ -1,4 +1,4 @@
-package first.android.cis.ui.news.openedNewsFragment
+package first.android.cis.presentation.news.openedNews
 
 import android.app.Application
 import android.os.Bundle
@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import first.android.cis.R
 import first.android.cis.databinding.OpenedNewsFragmentBinding
 
 class OpenedNewsFragment: Fragment() {
@@ -40,7 +38,8 @@ class OpenedNewsFragment: Fragment() {
         mViewModel = ViewModelProvider(this, NewsFactory(application = Application(),
             newsHeading = args.heading,
             newsDiscript = args.discription,
-            newsTimeDate = args.dateTime))
+            newsTimeDate = args.dateTime)
+        )
             .get(OpenedNewsViewModel::class.java)
         mViewModel.openedHeading.observe(activity as LifecycleOwner) {
             oppenedNewsHeading.text = it

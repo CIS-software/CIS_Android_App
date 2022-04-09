@@ -1,4 +1,4 @@
-package first.android.cis.ui.calendar
+package first.android.cis.presentation.calendar
 
 import android.os.Bundle
 import android.view.LayoutInflater

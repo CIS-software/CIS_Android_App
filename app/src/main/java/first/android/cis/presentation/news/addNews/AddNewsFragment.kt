@@ -1,4 +1,4 @@
-package first.android.cis.ui.news.addNewsFragment
+package first.android.cis.presentation.news.addNews
 
 import android.content.Context
 import android.os.Bundle
@@ -9,10 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import first.android.cis.R
 import first.android.cis.databinding.AddNewsFragmentBinding
-import first.android.cis.models.NewsListForAdd
+import first.android.cis.domain.models.news.NewsListForAdd
 import first.android.cis.network.Retrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package first.android.cis.ui.signUpIn
+package first.android.cis.presentation.signUpIn.signUp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.navigation.findNavController
 import first.android.cis.databinding.FragmentSignUpBinding
+import first.android.cis.domain.signUpIn.CheckInputData
 
 class SignUpFragment : Fragment() {
     private var _binding: FragmentSignUpBinding? = null
@@ -39,7 +39,8 @@ class SignUpFragment : Fragment() {
             val checkAuthData = CheckInputData()
             if (checkAuthData.checkAuthData(email, password, emailTextView, passwordTextView, activity)){
                 val moveToStep2 = SignUpFragmentDirections.actionSignUpFragmentToSignUpStep2Fragment(
-                    email, password)
+                        email, password
+                    )
                 nextBtnSignUp.findNavController().navigate(moveToStep2)
             }
         }

@@ -1,4 +1,4 @@
-package first.android.cis.ui.news.openedNewsFragment
+package first.android.cis.presentation.news.openedNews
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package first.android.cis.ui.news.addNewsFragment
+package first.android.cis.presentation.news.addNews
 
 import android.app.AlertDialog
 import android.app.Dialog

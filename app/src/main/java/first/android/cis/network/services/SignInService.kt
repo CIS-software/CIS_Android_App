@@ -1,4 +1,4 @@
-package first.android.cis.presentation.signUpIn.signIn
+package first.android.cis.network.services
 
 import android.content.Context
 import android.widget.Button
@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
-import first.android.cis.models.users.AuthData
-import first.android.cis.models.users.UserToken
+import first.android.cis.domain.models.user.AuthData
+import first.android.cis.domain.models.user.UserToken
 import first.android.cis.network.Retrofit
 import retrofit2.Call
 import retrofit2.Callback

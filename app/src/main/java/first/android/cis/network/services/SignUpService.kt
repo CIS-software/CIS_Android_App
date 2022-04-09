@@ -1,13 +1,12 @@
-package first.android.cis.presentation.signUpIn.signUp
+package first.android.cis.network.services
 
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavDirections
-import first.android.cis.models.users.AuthData
-import first.android.cis.models.users.UserSignInfo
+import first.android.cis.domain.models.user.AuthData
+import first.android.cis.domain.models.user.UserSignInfo
 import first.android.cis.network.Retrofit
-import first.android.cis.presentation.signUpIn.signIn.SignInService
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback

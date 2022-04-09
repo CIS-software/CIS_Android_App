@@ -1,11 +1,11 @@
-package first.android.cis.ui.news.mainNewsFragment
+package first.android.cis.presentation.news.mainNews
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import first.android.cis.models.NewsList
-import first.android.cis.network.NewsRepository
+import first.android.cis.domain.models.news.NewsList
+import first.android.cis.data.newsRepository.NewsRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

@@ -1,6 +1,7 @@
-package first.android.cis.network
+package first.android.cis.data.newsRepository
 
-import first.android.cis.models.NewsList
+import first.android.cis.domain.models.news.NewsList
+import first.android.cis.network.Retrofit
 import retrofit2.Response
 
 class NewsRepository{

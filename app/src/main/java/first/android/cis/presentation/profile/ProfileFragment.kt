@@ -1,9 +1,8 @@
-package first.android.cis.ui.profile
+package first.android.cis.presentation.profile
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +11,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
-import first.android.cis.MainActivity
+import first.android.cis.presentation.MainActivity
 import first.android.cis.databinding.FragmentProfileBinding
-import first.android.cis.models.users.UserInfo
-import first.android.cis.network.UserRepository
+import first.android.cis.domain.models.user.UserInfo
+import first.android.cis.data.userRepository.UserRepository
 
 class ProfileFragment : Fragment() {
 

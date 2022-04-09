@@ -1,8 +1,8 @@
-package first.android.cis.network
+package first.android.cis.network.api
 
-import first.android.cis.domain.models.NewsList
-import first.android.cis.domain.models.NewsListForAdd
-import first.android.cis.domain.models.NewsListItem
+import first.android.cis.domain.models.news.NewsList
+import first.android.cis.domain.models.news.NewsListForAdd
+import first.android.cis.domain.models.news.NewsListItem
 import retrofit2.Response
 import retrofit2.http.*
 

@@ -1,4 +1,4 @@
-package first.android.cis.domain.models.users
+package first.android.cis.domain.models.user
 
 import com.google.gson.annotations.SerializedName
 

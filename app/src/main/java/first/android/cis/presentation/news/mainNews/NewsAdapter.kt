@@ -1,4 +1,4 @@
-package first.android.cis.ui.news.mainNewsFragment
+package first.android.cis.presentation.news.mainNews
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
-import first.android.cis.models.NewsListItem
+import first.android.cis.domain.models.news.NewsListItem
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

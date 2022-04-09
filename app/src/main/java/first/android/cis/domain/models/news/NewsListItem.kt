@@ -1,4 +1,4 @@
-package first.android.cis.domain.models
+package first.android.cis.domain.models.news
 
 import com.google.gson.annotations.SerializedName
 

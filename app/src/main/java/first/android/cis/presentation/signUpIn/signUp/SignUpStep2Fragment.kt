@@ -1,4 +1,4 @@
-package first.android.cis.ui.signUpIn
+package first.android.cis.presentation.signUpIn.signUp
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpStep2Binding
-import first.android.cis.models.users.AuthData
-import first.android.cis.models.users.UserSignInfo
+import first.android.cis.domain.models.user.AuthData
+import first.android.cis.domain.models.user.UserSignInfo
+import first.android.cis.network.services.SignUpService
+import first.android.cis.domain.signUpIn.CheckInputData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

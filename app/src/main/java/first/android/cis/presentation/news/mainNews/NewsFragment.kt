@@ -1,4 +1,4 @@
-package first.android.cis.ui.news.mainNewsFragment
+package first.android.cis.presentation.news.mainNews
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,19 +10,14 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 import first.android.cis.databinding.FragmentNewsBinding
-import first.android.cis.network.NewsRepository
-import first.android.cis.ui.signUpIn.SignInFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import first.android.cis.data.newsRepository.NewsRepository
 
 class NewsFragment : Fragment() {
     private val myAdapter by lazy{ NewsAdapter() }

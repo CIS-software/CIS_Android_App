@@ -1,6 +1,6 @@
-package first.android.cis.network
+package first.android.cis.network.api
 
-import first.android.cis.domain.models.users.*
+import first.android.cis.domain.models.user.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response

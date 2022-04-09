@@ -1,8 +1,8 @@
-package first.android.cis.ui.profile
+package first.android.cis.presentation.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import first.android.cis.network.UserRepository
+import first.android.cis.data.userRepository.UserRepository
 
 class ProfileFactory(
     private val userRepository: UserRepository,
