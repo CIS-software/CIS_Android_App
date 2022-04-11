@@ -1,6 +1,5 @@
 package first.android.cis.presentation.signUpIn.signIn
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,14 +10,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import first.android.cis.data.tokens.TokensRepositoryImpl
 import first.android.cis.databinding.FragmentSignInBinding
 import first.android.cis.domain.models.user.AuthData
 import first.android.cis.domain.usecases.signInUp.CheckInputData
-import first.android.cis.domain.usecases.signInUp.GetTokens
-import first.android.cis.domain.usecases.signInUp.PostAuthData
+import first.android.cis.network.services.SignInServiceImpl
 
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
 private const val SHARED_PREF_NAME = "SHARED_PREF"
@@ -28,7 +24,8 @@ private const val KEY_USER_ID = "user_id"
 
 class SignInFragment : Fragment() {
     private val tokenRepository by lazy{TokensRepositoryImpl(requireActivity())}
-    private val postAuthData by lazy {PostAuthData(tokenRepository = tokenRepository)}
+    private val signInService by lazy{SignInServiceImpl(requireActivity())}
+
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
     private lateinit var signInAppBTN: Button
@@ -53,8 +50,8 @@ class SignInFragment : Fragment() {
         signInAppBTN.setOnClickListener{
             if(checkEmail() and checkPassword()){
                 val authData = AuthData(eMailEditTextSignIn.text.toString(), passwordEditTextSignIn.text.toString())
-                postAuthData.postAuthData(authData)
-                moveToNextFragment()
+                val action = SignInFragmentDirections.actionSignInFragmentToNavigationNews()
+                signInService.signInService(userAuth = authData,signInAppBTN, action)
             }else{
                 Toast.makeText(context, ERROR_MESSAGE, Toast.LENGTH_LONG).show()
             }
@@ -85,11 +82,7 @@ class SignInFragment : Fragment() {
     }
 
     private fun moveToNextFragment(){
-        val getTokens = GetTokens(tokenRepository)
-        val accessToken = getTokens.execute().accessToken
-        if(accessToken!=""){
-            signInAppBTN.findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToNavigationNews())
-        }
+        //TODO:
     }
 
     override fun onDestroyView() {

@@ -14,7 +14,7 @@ import androidx.navigation.findNavController
 import first.android.cis.presentation.MainActivity
 import first.android.cis.databinding.FragmentProfileBinding
 import first.android.cis.domain.models.user.UserInfo
-import first.android.cis.data.userRepository.UserRepository
+import first.android.cis.data.userRepository.UserRepositoryImpl
 
 class ProfileFragment : Fragment() {
 
@@ -60,7 +60,7 @@ class ProfileFragment : Fragment() {
         val sharedPreference =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
         val accessToken = "Bearer " + sharedPreference.getString("access_token","empty_token")
         val userId = sharedPreference.getInt("user_id", -1)
-        viewModelFactory = ProfileFactory(userRepository = UserRepository(), accessToken, userId)
+        viewModelFactory = ProfileFactory(userRepository = UserRepositoryImpl(requireActivity()), accessToken, userId)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
         viewModel.getUserInfo()
         viewModel.userInfoList.observe(viewLifecycleOwner){ response ->

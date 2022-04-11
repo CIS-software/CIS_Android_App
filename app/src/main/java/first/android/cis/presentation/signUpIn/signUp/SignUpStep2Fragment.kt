@@ -1,23 +1,32 @@
 package first.android.cis.presentation.signUpIn.signUp
 
 import android.app.DatePickerDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import first.android.cis.R
+import first.android.cis.data.tokens.TokensRepositoryImpl
+import first.android.cis.data.userRepository.UserRepositoryImpl
 import first.android.cis.databinding.FragmentSignUpStep2Binding
 import first.android.cis.domain.models.user.AuthData
 import first.android.cis.domain.models.user.UserSignInfo
 import first.android.cis.network.services.SignUpService
 import first.android.cis.domain.usecases.signInUp.CheckInputData
+import first.android.cis.domain.usecases.signInUp.CreateUser
+import first.android.cis.domain.usecases.signInUp.GetTokens
+import first.android.cis.presentation.signUpIn.signIn.SignInFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
+
+private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
 
 class SignUpStep2Fragment : Fragment() {
     private val args: SignUpStep2FragmentArgs by navArgs()
@@ -34,6 +43,7 @@ class SignUpStep2Fragment : Fragment() {
     private lateinit var userSurnameTextView: TextView
     private lateinit var townTextView: TextView
     private lateinit var dateTextView: TextView
+    private val checkInputData = CheckInputData()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,27 +63,61 @@ class SignUpStep2Fragment : Fragment() {
             dateTextView = it.dateTextView
         }
         endSignUpButton.setOnClickListener{
-            val userName: String = nameEditTextSignUp.text.toString()
-            val userSurname: String = surnameEditSignUp.text.toString()
-            val checkInputData = CheckInputData()
-            if (checkInputData.checkUserInfo(userName, userSurname,
-                    userNameTextView, userSurnameTextView, activity,
-                    dateOfBirth, selectedItem, townTextView, dateTextView)){
-                val userInfo = UserSignInfo(args.email, args.password,
+            if (checkUserName() and checkUserSurname() and checkDateOfBirth() and checkUserTown()){
+                val signUpService = SignUpService(requireActivity())
+                val action = SignUpStep2FragmentDirections.actionSignUpStep2FragmentToNavigationNews()
+                val userSignInfo = UserSignInfo(args.email, args.password,
                     nameEditTextSignUp.text.toString(),
                     surnameEditSignUp.text.toString(),
                     selectedItem, dateOfBirth
                 )
-                CoroutineScope(Dispatchers.Main).launch {
-                    val authData = AuthData(userInfo.eMail, userInfo.password)
-                    val signUpService = SignUpService()
-                    val actionNavigate = SignUpStep2FragmentDirections.actionSignUpStep2FragmentToNavigationNews()
-                    //signUpService.signUp(userInfo, requireActivity(), authData, endSignUpButton, actionNavigate)
-                }
+                signUpService.createUserService(userSignInfo = userSignInfo, endSignUpButton, action = action)
             }
         }
         datePickerConfig()
         return binding.root
+    }
+    private fun checkUserName(): Boolean{
+        userNameTextView.setTextColor(Color.BLACK)
+        val userName = nameEditTextSignUp.text.toString()
+        if(checkInputData.checkUserName(userName = userName)){
+            return true
+        }else{
+            userNameTextView.setTextColor(Color.RED)
+            return false
+        }
+    }
+
+    private fun checkUserSurname(): Boolean{
+        userSurnameTextView.setTextColor(Color.BLACK)
+        val userSurname = surnameEditSignUp.text.toString()
+        if(checkInputData.checkUserName(userName = userSurname)){
+            return true
+        }else{
+            userSurnameTextView.setTextColor(Color.RED)
+            return false
+        }
+    }
+
+    private fun checkDateOfBirth(): Boolean{
+        dateTextView.setTextColor(Color.BLACK)
+        if(checkInputData.checkDateofBirth(dateBirth = dateOfBirth)){
+            return true
+        }else{
+            dateTextView.setTextColor(Color.RED)
+            return false
+        }
+    }
+
+    private fun checkUserTown(): Boolean{
+        townTextView.setTextColor(Color.BLACK)
+        val userTown = selectedItem
+        if(checkInputData.checkUserTown(town = userTown)){
+            return true
+        }else {
+            townTextView.setTextColor(Color.RED)
+            return false
+        }
     }
 
     private fun datePickerConfig() {
@@ -115,6 +159,7 @@ class SignUpStep2Fragment : Fragment() {
             }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

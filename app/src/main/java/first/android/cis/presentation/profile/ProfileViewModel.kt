@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import first.android.cis.domain.models.user.UserInfo
-import first.android.cis.data.userRepository.UserRepository
+import first.android.cis.data.userRepository.UserRepositoryImpl
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
 
 class ProfileViewModel(
-    private val userRepository: UserRepository,
+    private val userRepository: UserRepositoryImpl,
     private val accessToken: String,
     private val userId: Int
 ) : ViewModel() {
