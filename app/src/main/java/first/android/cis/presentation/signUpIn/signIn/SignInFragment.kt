@@ -1,5 +1,7 @@
 package first.android.cis.presentation.signUpIn.signIn
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,15 +10,25 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import first.android.cis.data.tokens.TokensRepositoryImpl
 import first.android.cis.databinding.FragmentSignInBinding
 import first.android.cis.domain.models.user.AuthData
-import first.android.cis.network.services.SignInService
-import first.android.cis.domain.signUpIn.CheckInputData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import first.android.cis.domain.usecases.signInUp.CheckInputData
+import first.android.cis.domain.usecases.signInUp.GetTokens
+import first.android.cis.domain.usecases.signInUp.PostAuthData
+
+private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
+private const val SHARED_PREF_NAME = "SHARED_PREF"
+private const val KEY_ACCESS_TOKEN = "access_token"
+private const val KEY_REFRESH_TOKEN = "refresh_token"
+private const val KEY_USER_ID = "user_id"
 
 class SignInFragment : Fragment() {
+    private val tokenRepository by lazy{TokensRepositoryImpl(requireActivity())}
+    private val postAuthData by lazy {PostAuthData(tokenRepository = tokenRepository)}
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
     private lateinit var signInAppBTN: Button
@@ -24,6 +36,7 @@ class SignInFragment : Fragment() {
     private lateinit var passwordEditTextSignIn: EditText
     private lateinit var emailTextView: TextView
     private lateinit var passwordTextView: TextView
+    private val checkAuthData = CheckInputData()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,19 +51,45 @@ class SignInFragment : Fragment() {
             passwordTextView = it.passwordTextView
         }
         signInAppBTN.setOnClickListener{
-            val email: String = eMailEditTextSignIn.text.toString()
-            val password: String = passwordEditTextSignIn.text.toString()
-            val checkAuthData = CheckInputData()
-            if (checkAuthData.checkAuthData(email, password,emailTextView,passwordTextView, activity)){
-                val authData = AuthData(email, password)
-                val signInService = SignInService()
-                val navigateAction = SignInFragmentDirections.actionSignInFragmentToNavigationNews()
-                CoroutineScope(Dispatchers.Main).launch {
-                    signInService.loginUser(authData, signInAppBTN, requireActivity(), navigateAction)
-                }
+            if(checkEmail() and checkPassword()){
+                val authData = AuthData(eMailEditTextSignIn.text.toString(), passwordEditTextSignIn.text.toString())
+                postAuthData.postAuthData(authData)
+                moveToNextFragment()
+            }else{
+                Toast.makeText(context, ERROR_MESSAGE, Toast.LENGTH_LONG).show()
             }
         }
         return binding.root
+    }
+
+    private fun checkEmail(): Boolean {
+        emailTextView.setTextColor(Color.BLACK)
+        val email: String = eMailEditTextSignIn.text.toString()
+        if (checkAuthData.checkEmail(email = email)){
+            return true
+        }else {
+            emailTextView.setTextColor(Color.RED)
+            return false
+        }
+    }
+
+    private fun checkPassword(): Boolean {
+        passwordTextView.setTextColor(Color.BLACK)
+        val password: String = passwordEditTextSignIn.text.toString()
+        if (checkAuthData.checkPassword(password = password)){
+            return true
+        }else{
+            passwordTextView.setTextColor(Color.RED)
+            return false
+        }
+    }
+
+    private fun moveToNextFragment(){
+        val getTokens = GetTokens(tokenRepository)
+        val accessToken = getTokens.execute().accessToken
+        if(accessToken!=""){
+            signInAppBTN.findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToNavigationNews())
+        }
     }
 
     override fun onDestroyView() {

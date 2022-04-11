@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.navigation.findNavController
 import first.android.cis.databinding.FragmentSignUpBinding
-import first.android.cis.domain.signUpIn.CheckInputData
+import first.android.cis.domain.usecases.signInUp.CheckInputData
 
 class SignUpFragment : Fragment() {
     private var _binding: FragmentSignUpBinding? = null
@@ -33,17 +32,17 @@ class SignUpFragment : Fragment() {
             emailTextView = it.emailTextView
             passwordTextView = it.passwordTextView
         }
-        nextBtnSignUp.setOnClickListener{
+        //nextBtnSignUp.setOnClickListener{
             val email: String = emailEditTextSignUp.text.toString()
             val password: String = passwordEditTextSignUp.text.toString()
             val checkAuthData = CheckInputData()
-            if (checkAuthData.checkAuthData(email, password, emailTextView, passwordTextView, activity)){
-                val moveToStep2 = SignUpFragmentDirections.actionSignUpFragmentToSignUpStep2Fragment(
-                        email, password
-                    )
-                nextBtnSignUp.findNavController().navigate(moveToStep2)
-            }
-        }
+            //if (checkAuthData.checkAuthData(email, password, emailTextView, passwordTextView, activity)){
+                //val moveToStep2 = SignUpFragmentDirections.actionSignUpFragmentToSignUpStep2Fragment(
+                        //email, password
+                    //)
+                //nextBtnSignUp.findNavController().navigate(moveToStep2)
+            //}
+        //}
         return binding.root
     }
 

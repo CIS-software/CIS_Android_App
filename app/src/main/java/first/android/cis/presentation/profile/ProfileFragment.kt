@@ -59,7 +59,7 @@ class ProfileFragment : Fragment() {
         }
         val sharedPreference =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
         val accessToken = "Bearer " + sharedPreference.getString("access_token","empty_token")
-        val userId = sharedPreference.getInt("userId", -1)
+        val userId = sharedPreference.getInt("user_id", -1)
         viewModelFactory = ProfileFactory(userRepository = UserRepository(), accessToken, userId)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
         viewModel.getUserInfo()

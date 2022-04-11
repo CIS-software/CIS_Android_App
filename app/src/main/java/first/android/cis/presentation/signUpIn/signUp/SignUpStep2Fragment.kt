@@ -13,7 +13,7 @@ import first.android.cis.databinding.FragmentSignUpStep2Binding
 import first.android.cis.domain.models.user.AuthData
 import first.android.cis.domain.models.user.UserSignInfo
 import first.android.cis.network.services.SignUpService
-import first.android.cis.domain.signUpIn.CheckInputData
+import first.android.cis.domain.usecases.signInUp.CheckInputData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -68,7 +68,7 @@ class SignUpStep2Fragment : Fragment() {
                     val authData = AuthData(userInfo.eMail, userInfo.password)
                     val signUpService = SignUpService()
                     val actionNavigate = SignUpStep2FragmentDirections.actionSignUpStep2FragmentToNavigationNews()
-                    signUpService.signUp(userInfo, requireActivity(), authData, endSignUpButton, actionNavigate)
+                    //signUpService.signUp(userInfo, requireActivity(), authData, endSignUpButton, actionNavigate)
                 }
             }
         }

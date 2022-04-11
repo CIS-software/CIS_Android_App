@@ -1,4 +1,4 @@
-package first.android.cis.domain.signUpIn
+package first.android.cis.domain.usecases.signInUp
 
 import android.graphics.Color
 import android.widget.TextView
@@ -6,29 +6,21 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 
 class CheckInputData {
-    fun checkAuthData(
-        email: String,
-        password: String,
-        emailTextView: TextView,
-        passwordTextView: TextView,
-        activity: FragmentActivity?
-    ): Boolean {
-        emailTextView.setTextColor(Color.BLACK)
-        passwordTextView.setTextColor(Color.BLACK)
-        var errorCounter = 0
+
+    fun checkEmail(email: String): Boolean {
         if ((email == "") or (" " in email)){
-            emailTextView.setTextColor(Color.RED)
-            errorCounter += 1
-        }
-        if ((password == "") or (" " in password)){
-            passwordTextView.setTextColor(Color.RED)
-            errorCounter += 1
-        }
-        if (errorCounter > 0){
-            Toast.makeText(activity, "Ошибка! Данные введены некорректно!", Toast.LENGTH_LONG).show()
             return false
+        } else {
+            return true
         }
-        return true
+    }
+
+    fun checkPassword(password: String): Boolean{
+        if ((password == "") or (" " in password)){
+            return false
+        } else {
+            return true
+        }
     }
 
     fun checkUserInfo(
