@@ -8,22 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import first.android.cis.R
-import first.android.cis.data.tokens.TokensRepositoryImpl
-import first.android.cis.data.userRepository.UserRepositoryImpl
 import first.android.cis.databinding.FragmentSignUpStep2Binding
-import first.android.cis.domain.models.user.AuthData
 import first.android.cis.domain.models.user.UserSignInfo
 import first.android.cis.network.services.SignUpService
 import first.android.cis.domain.usecases.signInUp.CheckInputData
-import first.android.cis.domain.usecases.signInUp.CreateUser
-import first.android.cis.domain.usecases.signInUp.GetTokens
-import first.android.cis.presentation.signUpIn.signIn.SignInFragmentDirections
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.*
 
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"

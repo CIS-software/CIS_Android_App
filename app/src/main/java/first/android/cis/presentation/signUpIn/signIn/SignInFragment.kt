@@ -17,13 +17,8 @@ import first.android.cis.domain.usecases.signInUp.CheckInputData
 import first.android.cis.network.services.SignInServiceImpl
 
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
-private const val SHARED_PREF_NAME = "SHARED_PREF"
-private const val KEY_ACCESS_TOKEN = "access_token"
-private const val KEY_REFRESH_TOKEN = "refresh_token"
-private const val KEY_USER_ID = "user_id"
 
 class SignInFragment : Fragment() {
-    private val tokenRepository by lazy{TokensRepositoryImpl(requireActivity())}
     private val signInService by lazy{SignInServiceImpl(requireActivity())}
 
     private var _binding: FragmentSignInBinding? = null
@@ -79,10 +74,6 @@ class SignInFragment : Fragment() {
             passwordTextView.setTextColor(Color.RED)
             return false
         }
-    }
-
-    private fun moveToNextFragment(){
-        //TODO:
     }
 
     override fun onDestroyView() {

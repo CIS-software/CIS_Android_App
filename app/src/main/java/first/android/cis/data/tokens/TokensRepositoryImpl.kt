@@ -29,5 +29,9 @@ class TokensRepositoryImpl(private val context: Context):
         return UserToken(userId = userId, accessToken = accessToken, refreshToken = refreshToken)
     }
 
-
+    override fun deleteTokens() {
+        val editor = sharedPreference.edit()
+        editor.clear()
+        editor.apply()
+    }
 }
