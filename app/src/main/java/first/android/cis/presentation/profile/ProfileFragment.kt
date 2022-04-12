@@ -1,7 +1,5 @@
 package first.android.cis.presentation.profile
 
-import android.app.Application
-import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,7 +26,6 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModelFactory: ProfileFactory
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private var userInfoList = emptyList<UserInfo>()
     lateinit var exitButton: Button
     lateinit var userNameView: TextView
     lateinit var userSurnameView: TextView
@@ -65,7 +62,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun getUserInfo(){
-        val accessToken = "Bearer " + getTokens.execute().accessToken
+        val accessToken = getTokens.execute().accessToken
         val userId = getTokens.execute().userId
         val idAndAccessToken = IdAndAccessToken(userId = userId, accessToken = accessToken)
         viewModelFactory = ProfileFactory(userRepository = UserRepositoryImpl(requireActivity()),

@@ -5,17 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import first.android.cis.domain.models.news.NewsList
-import first.android.cis.data.newsRepository.NewsRepository
+import first.android.cis.data.newsRepository.NewsRepositoryImpl
+import first.android.cis.domain.usecases.news.GetNews
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class NewsViewModel(private val repository: NewsRepository, private val accessToken: String) : ViewModel() {
+class NewsViewModel(private val repository: NewsRepositoryImpl,
+                    private val accessToken: String
+                    ) : ViewModel() {
     val myNewsList: MutableLiveData<Response<NewsList>> = MutableLiveData()
-
+    val getNews by lazy{GetNews(newsRepository = repository)}
     fun getNewsVM(){
         viewModelScope.launch {
             try{
-                myNewsList.value =  repository.getNewsRepo(accessToken)
+                myNewsList.value =  getNews.execute(accessToken = accessToken)
             }catch (exception: Exception){
                 Log.d("NETWORK ERROR", exception.toString() )
             }

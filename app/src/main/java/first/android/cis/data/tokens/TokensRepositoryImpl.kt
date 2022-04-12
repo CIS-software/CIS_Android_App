@@ -9,6 +9,7 @@ private const val SHARED_PREF_NAME = "SHARED_PREF"
 private const val KEY_ACCESS_TOKEN = "access_token"
 private const val KEY_REFRESH_TOKEN = "refresh_token"
 private const val KEY_USER_ID = "user_id"
+private const val BEARER = "Bearer "
 
 class TokensRepositoryImpl(private val context: Context):
     TokensRepository {
@@ -23,8 +24,8 @@ class TokensRepositoryImpl(private val context: Context):
     }
 
     override fun getTokens(): UserToken {
-        val accessToken = sharedPreference.getString(KEY_ACCESS_TOKEN,"") ?: ""
-        val refreshToken = sharedPreference.getString(KEY_REFRESH_TOKEN,"") ?: ""
+        val accessToken = BEARER + sharedPreference.getString(KEY_ACCESS_TOKEN,"") ?: ""
+        val refreshToken = BEARER + sharedPreference.getString(KEY_REFRESH_TOKEN,"") ?: ""
         val userId = sharedPreference.getInt(KEY_USER_ID,-1)
         return UserToken(userId = userId, accessToken = accessToken, refreshToken = refreshToken)
     }

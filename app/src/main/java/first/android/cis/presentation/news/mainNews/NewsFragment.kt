@@ -1,7 +1,5 @@
 package first.android.cis.presentation.news.mainNews
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 import first.android.cis.databinding.FragmentNewsBinding
-import first.android.cis.data.newsRepository.NewsRepository
+import first.android.cis.data.newsRepository.NewsRepositoryImpl
+import first.android.cis.data.tokens.TokensRepositoryImpl
+import first.android.cis.domain.usecases.signInUp.GetTokens
 
 class NewsFragment : Fragment() {
     private val myAdapter by lazy{ NewsAdapter() }
@@ -26,6 +26,8 @@ class NewsFragment : Fragment() {
     private lateinit var addNewsButton: Button
     private lateinit var viewModel: NewsViewModel
     private lateinit var viewModelFactory: NewsFactory
+    private val tokensRepository by lazy {TokensRepositoryImpl(context =  requireActivity())}
+    private val getTokens by lazy{GetTokens(tokensRepository)}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +35,10 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View
     {
+        val navView: BottomNavigationView? = activity?.findViewById(R.id.navView)
         val actionAddNews = NewsFragmentDirections.actionNavigationNewsToAddNewsFragment()
+        navView?.visibility = View.VISIBLE
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         _binding = FragmentNewsBinding.inflate(inflater,container,false)
         binding.let{
             addNewsButton = it.addNewsButton
@@ -41,17 +46,13 @@ class NewsFragment : Fragment() {
         addNewsButton.setOnClickListener{
             addNewsButton.findNavController().navigate(actionAddNews)
         }
-        val navView: BottomNavigationView? = activity?.findViewById(R.id.navView)
-        navView?.visibility = View.VISIBLE
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedPreference =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
-        val accessToken = "Bearer " + sharedPreference.getString("access_token","empty_token")
-        viewModelFactory = NewsFactory(repository = NewsRepository(), accessToken)
+        val accessToken = getTokens.execute().accessToken
+        viewModelFactory = NewsFactory(repository = NewsRepositoryImpl(), accessToken)
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewsViewModel::class.java)
         viewModel.myNewsList.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
@@ -63,7 +64,6 @@ class NewsFragment : Fragment() {
         setupRecyclerView(view)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun setupRecyclerView(view: View){
         if (myAdapter.itemCount==0){
             viewModel.getNewsVM()
@@ -71,7 +71,6 @@ class NewsFragment : Fragment() {
         val recyclerNews: RecyclerView by lazy{ view.findViewById(R.id.recyclerView)}
         recyclerNews.layoutManager = LinearLayoutManager(activity)
         recyclerNews.adapter = myAdapter
-        myAdapter.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {

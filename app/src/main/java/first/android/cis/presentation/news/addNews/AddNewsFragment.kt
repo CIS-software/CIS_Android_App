@@ -9,8 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import first.android.cis.data.newsRepository.NewsRepositoryImpl
+import first.android.cis.data.tokens.TokensRepositoryImpl
 import first.android.cis.databinding.AddNewsFragmentBinding
 import first.android.cis.domain.models.news.NewsListForAdd
+import first.android.cis.domain.usecases.news.AddNews
+import first.android.cis.domain.usecases.signInUp.GetTokens
 import first.android.cis.network.Retrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +26,9 @@ class AddNewsFragment : Fragment() {
     private lateinit var postNewsButton: Button
     private lateinit var inputHeadingEditT: EditText
     private lateinit var inputDiscriptEditT: EditText
+    private val tokensRepository by lazy{TokensRepositoryImpl(context = requireActivity())}
+    private val newsRepository by lazy{NewsRepositoryImpl()}
+    private val getTokens by lazy{GetTokens(tokensRepository)}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,13 +53,12 @@ class AddNewsFragment : Fragment() {
                         discript: String,
                         inputHeadingEditT: EditText,
                         inputDiscriptEditT: EditText){
-        //TODO: Окно "Успех, запись добавлена" вылезит, даже если произойдет ошибка при запросе
         val newsList = NewsListForAdd(newsTitle = heading,
             newsDescription = discript, newsPhoto = "" , newsTimeDate = null)
-        val sharedPreference =  requireActivity().getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
-        val accessToken = "Bearer " + sharedPreference.getString("access_token","empty_token")
+        val accessToken = getTokens.execute().accessToken
+        val addNews = AddNews(newsRepository = newsRepository)
         CoroutineScope(Dispatchers.Main).launch {
-            Retrofit.newsApi.addNews(newsList, accessToken)
+            addNews.execute(newsListForAdd = newsList, accessToken)
         }
         DialogConfirmed().show(childFragmentManager, DialogConfirmed.TAG)
         inputHeadingEditT.text = null
