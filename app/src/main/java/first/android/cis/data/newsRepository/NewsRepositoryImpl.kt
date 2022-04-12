@@ -15,4 +15,8 @@ class NewsRepositoryImpl: NewsRepository{
     override suspend fun addNews(newsListForAdd: NewsListForAdd, accessToken: String): NewsListItem {
         return Retrofit.newsApi.addNews(newsList = newsListForAdd, accessToken)
     }
+
+    override suspend fun deleteNews(id: Int, accessToken: String) {
+        return Retrofit.newsApi.deleteNews(id = id, accessToken = accessToken)
+    }
 }

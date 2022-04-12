@@ -9,4 +9,6 @@ interface NewsRepository {
     suspend fun getNewsRepo(accessToken: String): Response<NewsList>
 
     suspend fun addNews(newsListForAdd: NewsListForAdd, accessToken: String): NewsListItem
+
+    suspend fun deleteNews(id: Int, accessToken: String)
 }
