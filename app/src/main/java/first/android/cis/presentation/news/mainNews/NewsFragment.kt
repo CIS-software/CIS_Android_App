@@ -26,7 +26,7 @@ class NewsFragment : Fragment() {
     private lateinit var addNewsButton: Button
     private lateinit var viewModel: NewsViewModel
     private lateinit var viewModelFactory: NewsFactory
-    private val tokensRepository by lazy {TokensRepositoryImpl(context =  requireActivity())}
+    private val tokensRepository by lazy {TokensRepositoryImpl(context =  requireActivity().applicationContext)}
     private val getTokens by lazy{GetTokens(tokensRepository)}
 
     override fun onCreateView(

@@ -20,7 +20,7 @@ import first.android.cis.domain.usecases.signInUp.DeleteTokens
 import first.android.cis.domain.usecases.signInUp.GetTokens
 
 class ProfileFragment : Fragment() {
-    private val tokensRepository by lazy{TokensRepositoryImpl(context = requireActivity())}
+    private val tokensRepository by lazy{TokensRepositoryImpl(context = requireActivity().applicationContext)}
     private val getTokens by lazy{GetTokens(tokensRepository = tokensRepository)}
     private lateinit var viewModel: ProfileViewModel
     private lateinit var viewModelFactory: ProfileFactory

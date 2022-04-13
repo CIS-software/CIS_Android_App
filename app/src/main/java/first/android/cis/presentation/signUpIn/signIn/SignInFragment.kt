@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import first.android.cis.data.tokens.TokensRepositoryImpl
 import first.android.cis.databinding.FragmentSignInBinding
 import first.android.cis.domain.models.user.AuthData
 import first.android.cis.domain.usecases.signInUp.CheckInputData
@@ -19,8 +18,7 @@ import first.android.cis.network.services.SignInServiceImpl
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
 
 class SignInFragment : Fragment() {
-    private val signInService by lazy{SignInServiceImpl(requireActivity())}
-
+    private val signInService by lazy{SignInServiceImpl(requireActivity().applicationContext)}
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
     private lateinit var signInAppBTN: Button

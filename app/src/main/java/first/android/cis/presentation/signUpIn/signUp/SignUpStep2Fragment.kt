@@ -54,7 +54,7 @@ class SignUpStep2Fragment : Fragment() {
         }
         endSignUpButton.setOnClickListener{
             if (checkUserName() and checkUserSurname() and checkDateOfBirth() and checkUserTown()){
-                val signUpService = SignUpService(requireActivity())
+                val signUpService = SignUpService(requireActivity().applicationContext)
                 val action = SignUpStep2FragmentDirections.actionSignUpStep2FragmentToNavigationNews()
                 val userSignInfo = UserSignInfo(args.email, args.password,
                     nameEditTextSignUp.text.toString(),

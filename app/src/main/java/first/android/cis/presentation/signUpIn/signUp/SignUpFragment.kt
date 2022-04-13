@@ -38,7 +38,6 @@ class SignUpFragment : Fragment() {
         nextBtnSignUp.setOnClickListener{
             val email: String = emailEditTextSignUp.text.toString()
             val password: String = passwordEditTextSignUp.text.toString()
-            val checkAuthData = CheckInputData()
             if (checkEmail() and checkPassword()){
                 nextBtnSignUp.findNavController().
                 navigate(SignUpFragmentDirections.

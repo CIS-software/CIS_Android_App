@@ -18,7 +18,6 @@ class SignInUpFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var signInButton: Button
     private lateinit var signUpButton: Button
-    private lateinit var navigationView: BottomNavigationView
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(

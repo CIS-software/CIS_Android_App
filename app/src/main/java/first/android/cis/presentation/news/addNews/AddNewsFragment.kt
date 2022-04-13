@@ -26,7 +26,7 @@ class AddNewsFragment : Fragment() {
     private lateinit var postNewsButton: Button
     private lateinit var inputHeadingEditT: EditText
     private lateinit var inputDiscriptEditT: EditText
-    private val tokensRepository by lazy{TokensRepositoryImpl(context = requireActivity())}
+    private val tokensRepository by lazy{TokensRepositoryImpl(context = requireActivity().applicationContext)}
     private val newsRepository by lazy{NewsRepositoryImpl()}
     private val getTokens by lazy{GetTokens(tokensRepository)}
 
