@@ -1,5 +1,6 @@
 package first.android.cis.domain.repository
 
+import first.android.cis.domain.models.news.NewsIdAndAccess
 import first.android.cis.domain.models.news.NewsList
 import first.android.cis.domain.models.news.NewsListForAdd
 import first.android.cis.domain.models.news.NewsListItem
@@ -10,5 +11,5 @@ interface NewsRepository {
 
     suspend fun addNews(newsListForAdd: NewsListForAdd, accessToken: String): NewsListItem
 
-    suspend fun deleteNews(id: Int, accessToken: String)
+    suspend fun deleteNews(newsIdAndAccess: NewsIdAndAccess)
 }

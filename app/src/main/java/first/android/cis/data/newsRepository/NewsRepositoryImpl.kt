@@ -1,10 +1,11 @@
 package first.android.cis.data.newsRepository
 
+import first.android.cis.domain.models.news.NewsIdAndAccess
 import first.android.cis.domain.models.news.NewsList
 import first.android.cis.domain.models.news.NewsListForAdd
 import first.android.cis.domain.models.news.NewsListItem
 import first.android.cis.domain.repository.NewsRepository
-import first.android.cis.network.Retrofit
+import first.android.cis.data.network.Retrofit
 import retrofit2.Response
 
 class NewsRepositoryImpl: NewsRepository{
@@ -16,7 +17,7 @@ class NewsRepositoryImpl: NewsRepository{
         return Retrofit.newsApi.addNews(newsList = newsListForAdd, accessToken)
     }
 
-    override suspend fun deleteNews(id: Int, accessToken: String) {
-        return Retrofit.newsApi.deleteNews(id = id, accessToken = accessToken)
+    override suspend fun deleteNews(newsIdAndAccess: NewsIdAndAccess) {
+        return Retrofit.newsApi.deleteNews(id = newsIdAndAccess.id, accessToken = newsIdAndAccess.accessToken)
     }
 }

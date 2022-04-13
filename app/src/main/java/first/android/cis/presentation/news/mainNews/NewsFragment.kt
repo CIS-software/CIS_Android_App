@@ -16,7 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 import first.android.cis.databinding.FragmentNewsBinding
 import first.android.cis.data.newsRepository.NewsRepositoryImpl
-import first.android.cis.data.tokens.TokensRepositoryImpl
+import first.android.cis.data.storage.sharedpref.SharedPrefTokensStorage
+import first.android.cis.data.tokensRepository.TokensRepositoryImpl
 import first.android.cis.domain.usecases.signInUp.GetTokens
 
 class NewsFragment : Fragment() {
@@ -26,7 +27,8 @@ class NewsFragment : Fragment() {
     private lateinit var addNewsButton: Button
     private lateinit var viewModel: NewsViewModel
     private lateinit var viewModelFactory: NewsFactory
-    private val tokensRepository by lazy {TokensRepositoryImpl(context =  requireActivity().applicationContext)}
+    private val tokenStorage by lazy { SharedPrefTokensStorage(requireActivity().applicationContext) }
+    private val tokensRepository by lazy {TokensRepositoryImpl(tokensStorage = tokenStorage)}
     private val getTokens by lazy{GetTokens(tokensRepository)}
 
     override fun onCreateView(

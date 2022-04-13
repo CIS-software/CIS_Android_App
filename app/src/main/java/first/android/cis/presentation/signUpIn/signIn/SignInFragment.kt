@@ -13,7 +13,7 @@ import android.widget.Toast
 import first.android.cis.databinding.FragmentSignInBinding
 import first.android.cis.domain.models.user.AuthData
 import first.android.cis.domain.usecases.signInUp.CheckInputData
-import first.android.cis.network.services.SignInServiceImpl
+import first.android.cis.data.network.services.SignInServiceImpl
 
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
 

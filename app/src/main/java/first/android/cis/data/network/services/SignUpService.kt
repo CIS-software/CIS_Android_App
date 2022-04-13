@@ -1,4 +1,4 @@
-package first.android.cis.network.services
+package first.android.cis.data.network.services
 
 import android.content.Context
 import android.widget.Button
@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.navigation.NavDirections
 import first.android.cis.domain.models.user.AuthData
 import first.android.cis.domain.models.user.UserSignInfo
-import first.android.cis.network.Retrofit
+import first.android.cis.data.network.Retrofit
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback

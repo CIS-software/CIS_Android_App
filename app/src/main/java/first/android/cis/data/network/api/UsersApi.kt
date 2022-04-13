@@ -1,4 +1,4 @@
-package first.android.cis.network.api
+package first.android.cis.data.network.api
 
 import first.android.cis.domain.models.user.*
 import okhttp3.ResponseBody

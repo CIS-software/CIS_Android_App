@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import first.android.cis.data.newsRepository.NewsRepositoryImpl
-import first.android.cis.data.tokens.TokensRepositoryImpl
+import first.android.cis.data.storage.sharedpref.SharedPrefTokensStorage
+import first.android.cis.data.tokensRepository.TokensRepositoryImpl
+import first.android.cis.domain.models.news.NewsIdAndAccess
 import first.android.cis.domain.usecases.news.DeleteNews
 import first.android.cis.domain.usecases.signInUp.GetTokens
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +22,8 @@ private const val DELETE_SUCCESS = "Запись удалена"
 private const val QUESTION = "Вопрос"
 
 class DialogAskForDelete(private val newsId: Int) : DialogFragment() {
-    private val tokensRepository by lazy{TokensRepositoryImpl(context = requireActivity())}
+    private val tokenStorage by lazy { SharedPrefTokensStorage(requireActivity().applicationContext) }
+    private val tokensRepository by lazy{TokensRepositoryImpl(tokenStorage)}
     private val getTokens by lazy{ GetTokens(tokensRepository) }
     private val newsRepository by lazy{NewsRepositoryImpl()}
     private val deleteNews by lazy{DeleteNews(newsRepository)}
@@ -39,8 +42,9 @@ class DialogAskForDelete(private val newsId: Int) : DialogFragment() {
     private fun deleteNews(){
         //TODO: Добавить обработку ошибок от сервера
         val accessToken = getTokens.execute().accessToken
+        val newsIdAndAccess = NewsIdAndAccess(id = newsId, accessToken)
         CoroutineScope(Dispatchers.Main).launch {
-            deleteNews.execute(id = newsId, accessToken = accessToken)
+            deleteNews.execute(newsIdAndAccess)
         }
     }
 

@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpStep2Binding
 import first.android.cis.domain.models.user.UserSignInfo
-import first.android.cis.network.services.SignUpService
+import first.android.cis.data.network.services.SignUpService
 import first.android.cis.domain.usecases.signInUp.CheckInputData
 import java.util.*
 

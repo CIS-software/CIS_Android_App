@@ -4,7 +4,7 @@ import android.content.Context
 import first.android.cis.domain.models.user.IdAndAccessToken
 import first.android.cis.domain.models.user.UserInfo
 import first.android.cis.domain.repository.UserRepository
-import first.android.cis.network.Retrofit
+import first.android.cis.data.network.Retrofit
 import retrofit2.Response
 
 class UserRepositoryImpl(val context: Context): UserRepository {

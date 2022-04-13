@@ -1,6 +1,5 @@
 package first.android.cis.presentation.news.addNews
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,12 +9,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import first.android.cis.data.newsRepository.NewsRepositoryImpl
-import first.android.cis.data.tokens.TokensRepositoryImpl
+import first.android.cis.data.storage.sharedpref.SharedPrefTokensStorage
+import first.android.cis.data.tokensRepository.TokensRepositoryImpl
 import first.android.cis.databinding.AddNewsFragmentBinding
 import first.android.cis.domain.models.news.NewsListForAdd
 import first.android.cis.domain.usecases.news.AddNews
 import first.android.cis.domain.usecases.signInUp.GetTokens
-import first.android.cis.network.Retrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +25,8 @@ class AddNewsFragment : Fragment() {
     private lateinit var postNewsButton: Button
     private lateinit var inputHeadingEditT: EditText
     private lateinit var inputDiscriptEditT: EditText
-    private val tokensRepository by lazy{TokensRepositoryImpl(context = requireActivity().applicationContext)}
+    private val tokenStorage by lazy{ SharedPrefTokensStorage(requireActivity().applicationContext) }
+    private val tokensRepository by lazy{TokensRepositoryImpl(tokensStorage = tokenStorage)}
     private val newsRepository by lazy{NewsRepositoryImpl()}
     private val getTokens by lazy{GetTokens(tokensRepository)}
 
