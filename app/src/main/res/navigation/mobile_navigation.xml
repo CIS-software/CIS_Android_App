@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_news"
-        android:name="first.android.cis.ui.news.mainNewsFragment.NewsFragment"
+        android:name="first.android.cis.presentation.news.mainNews.NewsFragment"
         android:label="Новости"
         tools:layout="@layout/fragment_news"
         >
@@ -21,13 +21,13 @@
 
     <fragment
         android:id="@+id/navigation_calendar"
-        android:name="first.android.cis.ui.calendar.CalendarFragment"
+        android:name="first.android.cis.presentation.calendar.CalendarFragment"
         android:label="Расписание"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="first.android.cis.ui.profile.ProfileFragment"
+        android:name="first.android.cis.presentation.profile.ProfileFragment"
         android:label="Профиль"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/openedNews"
-        android:name="first.android.cis.ui.news.openedNewsFragment.OpenedNewsFragment"
+        android:name="first.android.cis.presentation.news.openedNews.OpenedNewsFragment"
         android:label="Запись"
         tools:layout="@layout/opened_news_fragment">
         <argument
@@ -57,12 +57,12 @@
     </fragment>
     <fragment
         android:id="@+id/addNewsFragment"
-        android:name="first.android.cis.ui.news.addNewsFragment.AddNewsFragment"
+        android:name="first.android.cis.presentation.news.addNews.AddNewsFragment"
         android:label="Добавить запись"
         tools:layout="@layout/add_news_fragment" />
     <fragment
         android:id="@+id/regAuthFragment"
-        android:name="first.android.cis.ui.signUpIn.SignInUpFragment"
+        android:name="first.android.cis.presentation.signUpIn.SignInUpFragment"
         android:label="fragment_reg_auth"
         tools:layout="@layout/fragment_sign_in_up" >
         <action
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="first.android.cis.ui.signUpIn.SignInFragment"
+        android:name="first.android.cis.presentation.signUpIn.signIn.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="first.android.cis.ui.signUpIn.SignUpFragment"
+        android:name="first.android.cis.presentation.signUpIn.signUp.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpStep2Fragment"
-        android:name="first.android.cis.ui.signUpIn.SignUpStep2Fragment"
+        android:name="first.android.cis.presentation.signUpIn.signUp.SignUpStep2Fragment"
         android:label="fragment_sign_up_step2"
         tools:layout="@layout/fragment_sign_up_step2">
         <argument
