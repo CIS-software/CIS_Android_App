@@ -14,7 +14,7 @@ class NewsViewModel(private val repository: NewsRepositoryImpl,
                     private val accessToken: String
                     ) : ViewModel() {
     val myNewsList: MutableLiveData<Response<NewsList>> = MutableLiveData()
-    val getNews by lazy{GetNews(newsRepository = repository)}
+    private val getNews by lazy{GetNews(newsRepository = repository)}
     fun getNewsVM(){
         viewModelScope.launch {
             try{

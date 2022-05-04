@@ -35,7 +35,7 @@ class OpenedNewsFragment: Fragment() {
         deleteNewsBTN.setOnClickListener{
             DialogAskForDelete(args.id).show(childFragmentManager, DialogAskForDelete.TAG)
         }
-        mViewModel = ViewModelProvider(this, NewsFactory(application = Application(),
+        mViewModel = ViewModelProvider(requireActivity(), NewsFactory(application = Application(),
             newsHeading = args.heading,
             newsDiscript = args.discription,
             newsTimeDate = args.dateTime)
