@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpStep2Binding
-import first.android.cis.domain.models.user.UserSignInfo
-import first.android.cis.data.network.services.SignUpService
-import first.android.cis.domain.usecases.signInUp.CheckInputData
+import com.cis.domain.models.user.UserSignInfo
+import com.example.data.network.services.SignUpService
+import com.cis.domain.usecases.signInUp.CheckInputData
 import java.util.*
 
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"

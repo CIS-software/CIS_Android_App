@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 import first.android.cis.databinding.FragmentNewsBinding
-import first.android.cis.data.newsRepository.NewsRepositoryImpl
-import first.android.cis.data.storage.sharedpref.SharedPrefTokensStorage
-import first.android.cis.data.tokensRepository.TokensRepositoryImpl
-import first.android.cis.domain.usecases.signInUp.GetTokens
+import com.example.data.newsRepository.NewsRepositoryImpl
+import com.example.data.storage.sharedpref.SharedPrefTokensStorage
+import com.example.data.tokensRepository.TokensRepositoryImpl
+import com.cis.domain.usecases.signInUp.GetTokens
 
 class NewsFragment : Fragment() {
     private val myAdapter by lazy{ NewsAdapter() }
@@ -48,14 +48,10 @@ class NewsFragment : Fragment() {
         addNewsButton.setOnClickListener{
             addNewsButton.findNavController().navigate(actionAddNews)
         }
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         val accessToken = getTokens.execute().accessToken
         viewModelFactory = NewsFactory(repository = NewsRepositoryImpl(), accessToken)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(NewsViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(NewsViewModel::class.java)
         viewModel.myNewsList.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 response.body()?.let { myAdapter.setList(it) }
@@ -63,11 +59,12 @@ class NewsFragment : Fragment() {
                 Toast.makeText(activity, "Ошибка подключения", Toast.LENGTH_LONG).show()
             }
         }
-        setupRecyclerView(view)
+        setupRecyclerView(binding.root)
+        return binding.root
     }
 
     private fun setupRecyclerView(view: View){
-        if (myAdapter.itemCount==0){
+        if (viewModel.myNewsList.value == null){
             viewModel.getNewsVM()
         }
         val recyclerNews: RecyclerView by lazy{ view.findViewById(R.id.recyclerView)}

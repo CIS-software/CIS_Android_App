@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.findNavController
 import first.android.cis.databinding.FragmentSignUpBinding
-import first.android.cis.domain.usecases.signInUp.CheckInputData
+import com.cis.domain.usecases.signInUp.CheckInputData
 
 class SignUpFragment : Fragment() {
     private val checkAuthdata = CheckInputData()

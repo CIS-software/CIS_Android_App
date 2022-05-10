@@ -11,9 +11,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import first.android.cis.databinding.FragmentSignInBinding
-import first.android.cis.domain.models.user.AuthData
-import first.android.cis.domain.usecases.signInUp.CheckInputData
-import first.android.cis.data.network.services.SignInServiceImpl
+import com.cis.domain.models.user.AuthData
+import com.cis.domain.usecases.signInUp.CheckInputData
+import com.example.data.network.services.SignInServiceImpl
 
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
 

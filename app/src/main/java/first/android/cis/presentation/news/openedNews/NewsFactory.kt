@@ -12,7 +12,7 @@ class NewsFactory(
 ):
 ViewModelProvider.AndroidViewModelFactory(application){
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return OpenedNewsViewModel(application, newsHeading, newsDiscript, newsTimeDate) as T
+        return OpenedNewsViewModel(newsHeading, newsDiscript, newsTimeDate) as T
     }
 
 }
