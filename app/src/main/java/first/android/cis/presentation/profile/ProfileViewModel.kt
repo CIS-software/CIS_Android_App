@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import first.android.cis.domain.models.user.UserInfo
-import first.android.cis.data.userRepository.UserRepositoryImpl
-import first.android.cis.domain.models.user.IdAndAccessToken
-import first.android.cis.domain.usecases.user.GetUser
+import com.cis.domain.models.user.UserInfo
+import com.example.data.userRepository.UserRepositoryImpl
+import com.cis.domain.models.user.IdAndAccessToken
+import com.cis.domain.usecases.user.GetUser
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception

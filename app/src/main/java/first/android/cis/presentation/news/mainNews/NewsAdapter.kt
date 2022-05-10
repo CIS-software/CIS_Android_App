@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import first.android.cis.R
-import first.android.cis.domain.models.news.NewsListItem
+import com.cis.domain.models.news.NewsListItem
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

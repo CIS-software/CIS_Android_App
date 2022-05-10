@@ -10,15 +10,15 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
-import first.android.cis.data.storage.sharedpref.SharedPrefTokensStorage
-import first.android.cis.data.tokensRepository.TokensRepositoryImpl
+import com.example.data.storage.sharedpref.SharedPrefTokensStorage
+import com.example.data.tokensRepository.TokensRepositoryImpl
 import first.android.cis.presentation.MainActivity
 import first.android.cis.databinding.FragmentProfileBinding
-import first.android.cis.domain.models.user.UserInfo
-import first.android.cis.data.userRepository.UserRepositoryImpl
-import first.android.cis.domain.models.user.IdAndAccessToken
-import first.android.cis.domain.usecases.signInUp.DeleteTokens
-import first.android.cis.domain.usecases.signInUp.GetTokens
+import com.cis.domain.models.user.UserInfo
+import com.example.data.userRepository.UserRepositoryImpl
+import com.cis.domain.models.user.IdAndAccessToken
+import com.cis.domain.usecases.signInUp.DeleteTokens
+import com.cis.domain.usecases.signInUp.GetTokens
 
 class ProfileFragment : Fragment() {
     private val tokensStorage by lazy { SharedPrefTokensStorage(requireActivity().applicationContext) }

@@ -10,9 +10,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
-import first.android.cis.data.storage.sharedpref.SharedPrefTokensStorage
-import first.android.cis.data.tokensRepository.TokensRepositoryImpl
-import first.android.cis.domain.usecases.signInUp.GetTokens
+import com.example.data.storage.sharedpref.SharedPrefTokensStorage
+import com.example.data.tokensRepository.TokensRepositoryImpl
+import com.cis.domain.usecases.signInUp.GetTokens
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
