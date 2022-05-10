@@ -1,9 +1,9 @@
 package com.example.data.userRepository
 
 import android.content.Context
-import first.android.cis.domain.models.user.IdAndAccessToken
-import first.android.cis.domain.models.user.UserInfo
-import first.android.cis.domain.repository.UserRepository
+import com.cis.domain.models.user.IdAndAccessToken
+import com.cis.domain.models.user.UserInfo
+import com.cis.domain.repository.UserRepository
 import com.example.data.network.Retrofit
 import retrofit2.Response
 

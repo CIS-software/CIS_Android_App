@@ -2,8 +2,8 @@ package com.example.data.tokensRepository
 
 import com.example.data.storage.TokensStorage
 import com.example.data.storage.models.Tokens
-import first.android.cis.domain.models.user.UserToken
-import first.android.cis.domain.repository.TokensRepository
+import com.cis.domain.models.user.UserToken
+import com.cis.domain.repository.TokensRepository
 
 class TokensRepositoryImpl(private val tokensStorage: TokensStorage):
     TokensRepository {

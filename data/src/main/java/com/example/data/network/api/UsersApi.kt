@@ -1,6 +1,6 @@
 package com.example.data.network.api
 
-import first.android.cis.domain.models.user.*
+import com.cis.domain.models.user.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response

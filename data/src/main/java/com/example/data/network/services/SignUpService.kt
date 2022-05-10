@@ -4,8 +4,8 @@ import android.content.Context
 import android.widget.Button
 import android.widget.Toast
 import androidx.navigation.NavDirections
-import first.android.cis.domain.models.user.AuthData
-import first.android.cis.domain.models.user.UserSignInfo
+import com.cis.domain.models.user.AuthData
+import com.cis.domain.models.user.UserSignInfo
 import com.example.data.network.Retrofit
 import okhttp3.ResponseBody
 import retrofit2.Call

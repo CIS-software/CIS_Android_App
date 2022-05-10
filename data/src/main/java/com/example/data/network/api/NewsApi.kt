@@ -1,8 +1,8 @@
 package com.example.data.network.api
 
-import first.android.cis.domain.models.news.NewsList
-import first.android.cis.domain.models.news.NewsListForAdd
-import first.android.cis.domain.models.news.NewsListItem
+import com.cis.domain.models.news.NewsList
+import com.cis.domain.models.news.NewsListForAdd
+import com.cis.domain.models.news.NewsListItem
 import retrofit2.Response
 import retrofit2.http.*
 

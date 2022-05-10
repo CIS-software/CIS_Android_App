@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import com.example.data.tokensRepository.TokensRepositoryImpl
-import first.android.cis.domain.models.user.AuthData
-import first.android.cis.domain.models.user.UserToken
+import com.cis.domain.models.user.AuthData
+import com.cis.domain.models.user.UserToken
 import com.example.data.network.Retrofit
 import com.example.data.storage.sharedpref.SharedPrefTokensStorage
 import retrofit2.Call
