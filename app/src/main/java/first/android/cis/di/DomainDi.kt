@@ -1,4 +1,33 @@
 package first.android.cis.di
+import com.cis.domain.repository.UserRepository
+import com.cis.domain.usecases.news.AddNews
+import com.cis.domain.usecases.news.DeleteNews
+import com.cis.domain.usecases.news.GetNews
+import com.cis.domain.usecases.signInUp.DeleteTokens
+import com.cis.domain.usecases.signInUp.GetTokens
+import com.cis.domain.usecases.user.GetUser
+import org.koin.dsl.module
 
-class DomainDi {
+val domainModule = module {
+    //News
+    factory<AddNews>{
+        AddNews(newsRepository = get())
+    }
+    factory<DeleteNews> {
+        DeleteNews(newsRepository = get())
+    }
+    factory<GetNews> {
+        GetNews(newsRepository = get())
+    }
+    //SignInUp
+    factory<DeleteTokens> {
+        DeleteTokens(tokensRepository = get())
+    }
+    factory<GetTokens> {
+        GetTokens(tokensRepository = get())
+    }
+    //User
+    factory<GetUser>{
+        GetUser(userRepository = get())
+    }
 }

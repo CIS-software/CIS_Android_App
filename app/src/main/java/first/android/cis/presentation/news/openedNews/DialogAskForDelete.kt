@@ -44,7 +44,7 @@ class DialogAskForDelete(private val newsId: Int) : DialogFragment() {
         val accessToken = getTokens.execute().accessToken
         val newsIdAndAccess = NewsIdAndAccess(id = newsId, accessToken)
         CoroutineScope(Dispatchers.Main).launch {
-            deleteNews.execute(newsIdAndAccess)
+            deleteNews.execute(newsIdAndAccess = newsIdAndAccess)
         }
     }
 
