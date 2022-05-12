@@ -3,6 +3,7 @@ package first.android.cis.presentation.news.openedNews
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+/*
 
 class NewsFactory(
     val application: Application,
@@ -15,4 +16,4 @@ ViewModelProvider.AndroidViewModelFactory(application){
         return OpenedNewsViewModel(newsHeading, newsDiscript, newsTimeDate) as T
     }
 
-}
+}*/

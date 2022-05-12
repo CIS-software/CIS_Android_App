@@ -1,15 +1,14 @@
 package first.android.cis.presentation.news.openedNews
 
-import android.app.Application
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import first.android.cis.databinding.OpenedNewsFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OpenedNewsFragment: Fragment() {
     private var _binding: OpenedNewsFragmentBinding? = null
@@ -18,7 +17,7 @@ class OpenedNewsFragment: Fragment() {
     private lateinit var oppenedNewsDiscript: TextView
     private lateinit var oppenedTimeDate: TextView
     private lateinit var deleteNewsBTN: Button
-    private lateinit var mViewModel: OpenedNewsViewModel
+    private val openedNewsViewModel: OpenedNewsViewModel by viewModel<OpenedNewsViewModel>()
     private val args: OpenedNewsFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,19 +34,16 @@ class OpenedNewsFragment: Fragment() {
         deleteNewsBTN.setOnClickListener{
             DialogAskForDelete(args.id).show(childFragmentManager, DialogAskForDelete.TAG)
         }
-        mViewModel = ViewModelProvider(requireActivity(), NewsFactory(application = Application(),
-            newsHeading = args.heading,
-            newsDiscript = args.discription,
-            newsTimeDate = args.dateTime)
-        )
-            .get(OpenedNewsViewModel::class.java)
-        mViewModel.openedHeading.observe(activity as LifecycleOwner) {
+
+        openedNewsViewModel.setData(heading = args.heading, discription = args.discription, timeData = args.dateTime)
+
+        openedNewsViewModel.openedHeading.observe(activity as LifecycleOwner) {
             oppenedNewsHeading.text = it
         }
-        mViewModel.openedDiscript.observe(activity as LifecycleOwner) {
+        openedNewsViewModel.openedDiscript.observe(activity as LifecycleOwner) {
             oppenedNewsDiscript.text = it
         }
-        mViewModel.openedTimeDate.observe(activity as LifecycleOwner){
+        openedNewsViewModel.openedTimeDate.observe(activity as LifecycleOwner){
             oppenedTimeDate.text = it
         }
         return binding.root

@@ -14,5 +14,5 @@ interface NewsApi {
     suspend fun addNews(@Body newsList: NewsListForAdd, @Header("Authorization") accessToken: String): Response<NewsListItem>
 
     @DELETE("/news/{id}")
-    suspend fun deleteNews(@Path("id")id: Int, @Header("Authorization") accessToken: String)
+    suspend fun deleteNews(@Path("id")id: Int, @Header("Authorization") accessToken: String): Response<Throwable>
 }

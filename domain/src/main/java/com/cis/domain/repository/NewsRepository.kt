@@ -11,5 +11,5 @@ interface NewsRepository {
 
     suspend fun addNews(newsListForAdd: NewsListForAdd, accessToken: String): Response<NewsListItem>
 
-    suspend fun deleteNews(newsIdAndAccess: NewsIdAndAccess)
+    suspend fun deleteNews(newsIdAndAccess: NewsIdAndAccess): Response<Throwable>
 }
