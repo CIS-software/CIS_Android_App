@@ -13,6 +13,7 @@ import org.koin.core.logger.Level
 class App: Application() {
     override fun onCreate() {
         super.onCreate()
+        //TODO: val mainActivity: MainActivity = activity as MainActivity попробовать это, а потом вызвать метод сет старт
 
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)

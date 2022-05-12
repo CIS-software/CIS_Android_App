@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cis.domain.models.user.UserInfo
 import com.cis.domain.models.user.IdAndAccessToken
+import com.cis.domain.repository.TokensRepository
 import com.cis.domain.repository.UserRepository
+import com.cis.domain.usecases.signInUp.DeleteTokens
 import com.cis.domain.usecases.signInUp.GetTokens
 import com.cis.domain.usecases.user.GetUser
 import kotlinx.coroutines.launch
@@ -15,11 +17,13 @@ import java.lang.Exception
 
 class ProfileViewModel(
     private val userRepository: UserRepository,
-    private val getTokens: GetTokens
+    private val getTokens: GetTokens,
+    private val tokensRepository: TokensRepository
 ) : ViewModel() {
-    val idAndAccessToken = IdAndAccessToken(getTokens.execute().userId, getTokens.execute().accessToken)
-    val getUser by lazy{GetUser(userRepository)}
+    private val idAndAccessToken = IdAndAccessToken(getTokens.execute().userId, getTokens.execute().accessToken)
+    private val getUser by lazy{GetUser(userRepository)}
     val userInfoList: MutableLiveData<Response<UserInfo>> = MutableLiveData()
+
     fun getUserInfo(){
         viewModelScope.launch {
             try{
@@ -29,5 +33,11 @@ class ProfileViewModel(
             }
         }
     }
+
+    fun userLogout(){
+        val deleteTokens = DeleteTokens(tokensRepository = tokensRepository)
+        deleteTokens.execute()
+    }
+
 }
 

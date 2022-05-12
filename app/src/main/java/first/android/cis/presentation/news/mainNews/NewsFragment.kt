@@ -22,13 +22,11 @@ import com.cis.domain.usecases.signInUp.GetTokens
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsFragment : Fragment() {
+    private val newsViewModel by viewModel<NewsViewModel>()
     private val myAdapter by lazy{ NewsAdapter() }
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
     private lateinit var addNewsButton: Button
-    private val newsViewModel by viewModel<NewsViewModel>() //18:00
-    private val tokenStorage by lazy { SharedPrefTokensStorage(requireActivity().applicationContext) }
-    private val tokensRepository by lazy {TokensRepositoryImpl(tokensStorage = tokenStorage)}
 
     override fun onCreateView(
         inflater: LayoutInflater,

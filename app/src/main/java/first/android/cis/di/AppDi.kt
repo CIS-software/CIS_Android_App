@@ -11,6 +11,8 @@ val appModule = module {
     }
 
     viewModel<ProfileViewModel>{
-        ProfileViewModel(userRepository = get(), getTokens = get())
+        ProfileViewModel(userRepository = get(),
+            getTokens = get(),
+            tokensRepository = get())
     }
 }
