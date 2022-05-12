@@ -8,17 +8,12 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.R
 import first.android.cis.databinding.FragmentNewsBinding
-import com.example.data.newsRepository.NewsRepositoryImpl
-import com.example.data.storage.sharedpref.SharedPrefTokensStorage
-import com.example.data.tokensRepository.TokensRepositoryImpl
-import com.cis.domain.usecases.signInUp.GetTokens
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsFragment : Fragment() {

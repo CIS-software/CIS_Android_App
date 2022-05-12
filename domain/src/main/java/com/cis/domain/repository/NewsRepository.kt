@@ -9,7 +9,7 @@ import retrofit2.Response
 interface NewsRepository {
     suspend fun getNewsRepo(accessToken: String): Response<NewsList>
 
-    suspend fun addNews(newsListForAdd: NewsListForAdd, accessToken: String): NewsListItem
+    suspend fun addNews(newsListForAdd: NewsListForAdd, accessToken: String): Response<NewsListItem>
 
     suspend fun deleteNews(newsIdAndAccess: NewsIdAndAccess)
 }
