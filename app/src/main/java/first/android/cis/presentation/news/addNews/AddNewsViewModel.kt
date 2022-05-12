@@ -22,5 +22,4 @@ class AddNewsViewModel(private val addNews: AddNews, private val getTokens: GetT
             }
         }
     }
-    //TODO: Тут надо сделать всю логику по отправке запроса на сервер
 }
