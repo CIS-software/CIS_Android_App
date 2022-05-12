@@ -19,13 +19,13 @@ import com.example.data.userRepository.UserRepositoryImpl
 import com.cis.domain.models.user.IdAndAccessToken
 import com.cis.domain.usecases.signInUp.DeleteTokens
 import com.cis.domain.usecases.signInUp.GetTokens
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
     private val tokensStorage by lazy { SharedPrefTokensStorage(requireActivity().applicationContext) }
     private val tokensRepository by lazy{TokensRepositoryImpl(tokensStorage)}
     private val getTokens by lazy{GetTokens(tokensRepository = tokensRepository)}
-    private lateinit var viewModel: ProfileViewModel
-    private lateinit var viewModelFactory: ProfileFactory
+    private val profileViewModel by viewModel<ProfileViewModel>()
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     lateinit var exitButton: Button
@@ -64,14 +64,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun getUserInfo(){
-        val accessToken = getTokens.execute().accessToken
-        val userId = getTokens.execute().userId
-        val idAndAccessToken = IdAndAccessToken(userId = userId, accessToken = accessToken)
-        viewModelFactory = ProfileFactory(userRepository = UserRepositoryImpl(requireActivity()),
-            idAndAccessToken = idAndAccessToken)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
-        viewModel.getUserInfo()
-        viewModel.userInfoList.observe(viewLifecycleOwner){ response ->
+        profileViewModel.getUserInfo()
+        profileViewModel.userInfoList.observe(viewLifecycleOwner){ response ->
             if (response.isSuccessful){
                 val userInfo = response.body()
                 setUserView(userInfo)

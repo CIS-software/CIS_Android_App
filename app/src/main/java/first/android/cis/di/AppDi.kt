@@ -1,11 +1,16 @@
 package first.android.cis.di
 
-import android.app.Application
+import first.android.cis.presentation.news.mainNews.NewsViewModel
+import first.android.cis.presentation.profile.ProfileViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-class AppDi: Application() {
+val appModule = module {
+    viewModel<NewsViewModel>{
+        NewsViewModel(repository = get(), getTokens = get())
+    }
 
-    override fun onCreate() {
-        super.onCreate()
-
+    viewModel<ProfileViewModel>{
+        ProfileViewModel(userRepository = get(), getTokens = get())
     }
 }

@@ -19,17 +19,16 @@ import com.example.data.newsRepository.NewsRepositoryImpl
 import com.example.data.storage.sharedpref.SharedPrefTokensStorage
 import com.example.data.tokensRepository.TokensRepositoryImpl
 import com.cis.domain.usecases.signInUp.GetTokens
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsFragment : Fragment() {
     private val myAdapter by lazy{ NewsAdapter() }
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
     private lateinit var addNewsButton: Button
-    private lateinit var viewModel: NewsViewModel
-    private lateinit var viewModelFactory: NewsFactory
+    private val newsViewModel by viewModel<NewsViewModel>() //18:00
     private val tokenStorage by lazy { SharedPrefTokensStorage(requireActivity().applicationContext) }
     private val tokensRepository by lazy {TokensRepositoryImpl(tokensStorage = tokenStorage)}
-    private val getTokens by lazy{GetTokens(tokensRepository)}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,10 +48,7 @@ class NewsFragment : Fragment() {
             addNewsButton.findNavController().navigate(actionAddNews)
         }
 
-        val accessToken = getTokens.execute().accessToken
-        viewModelFactory = NewsFactory(repository = NewsRepositoryImpl(), accessToken)
-        viewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(NewsViewModel::class.java)
-        viewModel.myNewsList.observe(viewLifecycleOwner) { response ->
+        newsViewModel.myNewsList.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 response.body()?.let { myAdapter.setList(it) }
             } else {
@@ -64,8 +60,8 @@ class NewsFragment : Fragment() {
     }
 
     private fun setupRecyclerView(view: View){
-        if (viewModel.myNewsList.value == null){
-            viewModel.getNewsVM()
+        if (newsViewModel.myNewsList.value == null){
+            newsViewModel.getNewsVM()
         }
         val recyclerNews: RecyclerView by lazy{ view.findViewById(R.id.recyclerView)}
         recyclerNews.layoutManager = LinearLayoutManager(activity)
