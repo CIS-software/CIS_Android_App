@@ -54,7 +54,6 @@ class AddNewsFragment : Fragment() {
         val newsList = NewsListForAdd(newsTitle = heading,
             newsDescription = discript, newsPhoto = "" , newsTimeDate = null)
         addNewsViewModel.addNews(newsListForAdd = newsList)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

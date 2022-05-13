@@ -23,6 +23,6 @@ val appModule = module {
     }
 
     viewModel<OpenedNewsViewModel>{
-        OpenedNewsViewModel()
+        OpenedNewsViewModel(getTokens = get(), deleteNews = get())
     }
 }

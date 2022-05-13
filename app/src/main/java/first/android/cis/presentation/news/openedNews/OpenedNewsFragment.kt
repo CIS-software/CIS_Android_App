@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.navArgs
@@ -34,7 +35,6 @@ class OpenedNewsFragment: Fragment() {
         deleteNewsBTN.setOnClickListener{
             DialogAskForDelete(args.id).show(childFragmentManager, DialogAskForDelete.TAG)
         }
-
         openedNewsViewModel.setData(heading = args.heading, discription = args.discription, timeData = args.dateTime)
 
         openedNewsViewModel.openedHeading.observe(activity as LifecycleOwner) {
@@ -45,6 +45,13 @@ class OpenedNewsFragment: Fragment() {
         }
         openedNewsViewModel.openedTimeDate.observe(activity as LifecycleOwner){
             oppenedTimeDate.text = it
+        }
+        openedNewsViewModel.deleteResponse.observe(viewLifecycleOwner){ response ->
+            if (response.isSuccessful){
+                Toast.makeText(activity, "Запись удалена",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireActivity(), "Ошибка подключения!", Toast.LENGTH_LONG).show()
+            }
         }
         return binding.root
     }
