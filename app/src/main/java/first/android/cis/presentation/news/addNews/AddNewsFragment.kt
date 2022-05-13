@@ -8,27 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import com.example.data.newsRepository.NewsRepositoryImpl
-import com.example.data.storage.sharedpref.SharedPrefTokensStorage
-import com.example.data.tokensRepository.TokensRepositoryImpl
+import android.widget.Toast
 import first.android.cis.databinding.AddNewsFragmentBinding
 import com.cis.domain.models.news.NewsListForAdd
-import com.cis.domain.usecases.news.AddNews
-import com.cis.domain.usecases.signInUp.GetTokens
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddNewsFragment : Fragment() {
+    private val addNewsViewModel by viewModel<AddNewsViewModel>()
     private var _binding: AddNewsFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var postNewsButton: Button
     private lateinit var inputHeadingEditT: EditText
     private lateinit var inputDiscriptEditT: EditText
-    private val tokenStorage by lazy{ SharedPrefTokensStorage(requireActivity().applicationContext) }
-    private val tokensRepository by lazy{TokensRepositoryImpl(tokensStorage = tokenStorage)}
-    private val newsRepository by lazy{NewsRepositoryImpl()}
-    private val getTokens by lazy{GetTokens(tokensRepository)}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,28 +32,28 @@ class AddNewsFragment : Fragment() {
             inputHeadingEditT = it.inputHeadingEditT
             inputDiscriptEditT = it.inputDiscriptEditT
         }
+
+        addNewsViewModel.itemForAddNews.observe(viewLifecycleOwner){ response ->
+            if (response.isSuccessful){
+                DialogConfirmed().show(childFragmentManager, DialogConfirmed.TAG)
+                inputHeadingEditT.text = null
+                inputDiscriptEditT.text = null
+            } else {
+                Toast.makeText(activity, "Ошибка подключение", Toast.LENGTH_LONG).show()
+            }
+        }
         postNewsButton.setOnClickListener{
             val heading = inputHeadingEditT.text.toString()
             val discript = inputDiscriptEditT.text.toString()
-            addNews(heading,discript, inputHeadingEditT, inputDiscriptEditT)
+            createNews(heading,discript)
         }
         return binding.root
     }
 
-    private fun addNews(heading: String,
-                        discript: String,
-                        inputHeadingEditT: EditText,
-                        inputDiscriptEditT: EditText){
+    private fun createNews(heading: String, discript: String){
         val newsList = NewsListForAdd(newsTitle = heading,
             newsDescription = discript, newsPhoto = "" , newsTimeDate = null)
-        val accessToken = getTokens.execute().accessToken
-        val addNews = AddNews(newsRepository = newsRepository)
-        CoroutineScope(Dispatchers.Main).launch {
-            addNews.execute(newsListForAdd = newsList, accessToken)
-        }
-        DialogConfirmed().show(childFragmentManager, DialogConfirmed.TAG)
-        inputHeadingEditT.text = null
-        inputDiscriptEditT.text = null
+        addNewsViewModel.addNews(newsListForAdd = newsList)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

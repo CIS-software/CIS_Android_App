@@ -1,6 +1,5 @@
 package first.android.cis.presentation.profile
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,17 +14,11 @@ import com.example.data.tokensRepository.TokensRepositoryImpl
 import first.android.cis.presentation.MainActivity
 import first.android.cis.databinding.FragmentProfileBinding
 import com.cis.domain.models.user.UserInfo
-import com.example.data.userRepository.UserRepositoryImpl
-import com.cis.domain.models.user.IdAndAccessToken
 import com.cis.domain.usecases.signInUp.DeleteTokens
-import com.cis.domain.usecases.signInUp.GetTokens
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
-    private val tokensStorage by lazy { SharedPrefTokensStorage(requireActivity().applicationContext) }
-    private val tokensRepository by lazy{TokensRepositoryImpl(tokensStorage)}
-    private val getTokens by lazy{GetTokens(tokensRepository = tokensRepository)}
-    private lateinit var viewModel: ProfileViewModel
-    private lateinit var viewModelFactory: ProfileFactory
+    private val profileViewModel by viewModel<ProfileViewModel>()
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     lateinit var exitButton: Button
@@ -55,8 +48,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         exitButton.setOnClickListener{
             val mainActivity: MainActivity = activity as MainActivity
-            val deleteTokens = DeleteTokens(tokensRepository = tokensRepository)
-            deleteTokens.execute()
+            profileViewModel.userLogout()
             exitButton.findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToRegAuthFragment())
             mainActivity.setStartDestination()
         }
@@ -64,14 +56,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun getUserInfo(){
-        val accessToken = getTokens.execute().accessToken
-        val userId = getTokens.execute().userId
-        val idAndAccessToken = IdAndAccessToken(userId = userId, accessToken = accessToken)
-        viewModelFactory = ProfileFactory(userRepository = UserRepositoryImpl(requireActivity()),
-            idAndAccessToken = idAndAccessToken)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
-        viewModel.getUserInfo()
-        viewModel.userInfoList.observe(viewLifecycleOwner){ response ->
+        profileViewModel.getUserInfo()
+        profileViewModel.userInfoList.observe(viewLifecycleOwner){ response ->
             if (response.isSuccessful){
                 val userInfo = response.body()
                 setUserView(userInfo)
