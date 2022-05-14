@@ -10,15 +10,18 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.findNavController
 import first.android.cis.databinding.FragmentSignInBinding
 import com.cis.domain.models.user.AuthData
 import com.cis.domain.usecases.signInUp.CheckInputData
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 //import com.example.data.network.services.SignInServiceImpl
 
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
 
 class SignInFragment : Fragment() {
-    //private val signInService by lazy{SignInServiceImpl(requireActivity().applicationContext)}
+    private val signInViewModel by viewModel<SignInViewModel>()
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
     private lateinit var signInAppBTN: Button
@@ -40,14 +43,24 @@ class SignInFragment : Fragment() {
             emailTextView = it.emailTextView
             passwordTextView = it.passwordTextView
         }
+        val action = SignInFragmentDirections.actionSignInFragmentToNavigationNews()
         signInAppBTN.setOnClickListener{
             if(checkEmail() and checkPassword()){
                 val authData = AuthData(eMailEditTextSignIn.text.toString(), passwordEditTextSignIn.text.toString())
-                val action = SignInFragmentDirections.actionSignInFragmentToNavigationNews()
-                //signInService.signInService(userAuth = authData,signInAppBTN, action)
+                signInViewModel.signInUser(authData = authData)
             }else{
                 Toast.makeText(context, ERROR_MESSAGE, Toast.LENGTH_LONG).show()
             }
+        }
+
+        signInViewModel.signInUserResponse.observe(viewLifecycleOwner){ response ->
+            if(response.isSuccessful){
+                response.body()?.let { signInViewModel.saveTokens(it) }
+                signInAppBTN.findNavController().navigate(action)
+            } else {
+                Toast.makeText(activity, "Ошибка подключения", Toast.LENGTH_LONG).show()
+            }
+
         }
         return binding.root
     }

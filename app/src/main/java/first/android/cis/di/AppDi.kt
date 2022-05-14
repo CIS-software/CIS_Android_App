@@ -4,6 +4,7 @@ import first.android.cis.presentation.news.addNews.AddNewsViewModel
 import first.android.cis.presentation.news.mainNews.NewsViewModel
 import first.android.cis.presentation.news.openedNews.OpenedNewsViewModel
 import first.android.cis.presentation.profile.ProfileViewModel
+import first.android.cis.presentation.signUpIn.signIn.SignInViewModel
 import first.android.cis.presentation.signUpIn.signUp.signUpStep2.Step2ViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -29,5 +30,9 @@ val appModule = module {
 
     viewModel<Step2ViewModel>{
         Step2ViewModel(createUser = get(), signInUser = get(), tokensRepository = get())
+    }
+
+    viewModel<SignInViewModel>{
+        SignInViewModel(tokensRepository = get(), signInUser = get())
     }
 }

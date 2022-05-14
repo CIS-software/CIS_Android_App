@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -16,7 +15,6 @@ import com.cis.domain.models.user.AuthData
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpStep2Binding
 import com.cis.domain.models.user.UserSignInfo
-//import com.example.data.network.services.SignUpService
 import com.cis.domain.usecases.signInUp.CheckInputData
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -66,7 +64,6 @@ class SignUpStep2Fragment : Fragment() {
                     surnameEditSignUp.text.toString(),
                     selectedItem, dateOfBirth
                 )
-
                 step2ViewModel.createUser(userSignInfo = userSignInfo)
             }
         }
@@ -90,11 +87,8 @@ class SignUpStep2Fragment : Fragment() {
     private fun saveToken(action: NavDirections){
         step2ViewModel.signInUserResponse.observe(viewLifecycleOwner){ response ->
             if (response.isSuccessful){
-                val tokens = response.body()
-                if (tokens != null) {
-                    step2ViewModel.saveTokens(userToken = tokens)
-                    endSignUpButton.findNavController().navigate(action)
-                }
+                response.body()?.let { step2ViewModel.saveTokens(it) }
+                endSignUpButton.findNavController().navigate(action)
             } else {
                 Toast.makeText(activity, "Ошибка подключения", Toast.LENGTH_LONG).show()
             }

@@ -1,4 +1,4 @@
-package first.android.cis.presentation.signUpIn
+package first.android.cis.presentation.signUpIn.startsignfragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,9 +9,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import first.android.cis.databinding.FragmentSignInUpBinding
-import kotlinx.android.synthetic.main.activity_main.*
 
 class SignInUpFragment : Fragment() {
     private var _binding: FragmentSignInUpBinding? = null

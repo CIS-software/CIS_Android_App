@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.signUpIn.SignInUpFragment"
+    tools:context=".presentation.signUpIn.startsignfragment.SignInUpFragment"
     android:background="@color/primary_dark_grey">
 
     <ImageView

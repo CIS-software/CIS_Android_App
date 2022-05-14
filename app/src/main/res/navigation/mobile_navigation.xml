@@ -62,7 +62,7 @@
         tools:layout="@layout/add_news_fragment" />
     <fragment
         android:id="@+id/regAuthFragment"
-        android:name="first.android.cis.presentation.signUpIn.SignInUpFragment"
+        android:name="first.android.cis.presentation.signUpIn.startsignfragment.SignInUpFragment"
         android:label="fragment_reg_auth"
         tools:layout="@layout/fragment_sign_in_up" >
         <action
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="first.android.cis.presentation.signUpIn.signUp.SignUpFragment"
+        android:name="first.android.cis.presentation.signUpIn.signUp.signup.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action

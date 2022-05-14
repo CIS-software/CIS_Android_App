@@ -1,4 +1,4 @@
-package first.android.cis.presentation.signUpIn.signUp
+package first.android.cis.presentation.signUpIn.signUp.signup
 
 import android.graphics.Color
 import android.os.Bundle
