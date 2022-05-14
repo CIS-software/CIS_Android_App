@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.signUpIn.signUp.SignUpFragment"
+    tools:context=".presentation.signUpIn.signUp.signup.SignUpFragment"
     android:background="@color/primary_dark_grey">
     <TextView
         android:id="@+id/karateTextView"

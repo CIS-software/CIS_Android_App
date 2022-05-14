@@ -11,10 +11,10 @@ import retrofit2.http.Path
 
 interface UsersApi {
     @POST("/create-user")
-    fun createUserInfo(@Body userSignInfo: UserSignInfo): Call<ResponseBody>
+    suspend fun createUser(@Body userSignInfo: UserSignInfo): Response<Throwable>
 
     @POST("/login")
-    fun signIn(@Body authData: AuthData): Call<UserToken>
+    suspend fun signIn(@Body authData: AuthData): Response<UserToken>
 
     @POST("/user/{id}")
     suspend fun getUserInfo(@Path("id")userId: Int, @Header("Authorization") accessToken: String): Response<UserInfo>
