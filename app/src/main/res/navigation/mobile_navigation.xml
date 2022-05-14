@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpStep2Fragment"
-        android:name="first.android.cis.presentation.signUpIn.signUp.SignUpStep2Fragment"
+        android:name="first.android.cis.presentation.signUpIn.signUp.signUpStep2.SignUpStep2Fragment"
         android:label="fragment_sign_up_step2"
         tools:layout="@layout/fragment_sign_up_step2">
         <argument

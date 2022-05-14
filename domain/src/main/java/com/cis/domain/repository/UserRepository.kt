@@ -6,6 +6,6 @@ import retrofit2.Response
 
 interface UserRepository {
     suspend fun getUserInfoRepo(idAndAccessToken: IdAndAccessToken): Response<UserInfo>
-    suspend fun createUser(userSignInfo: UserSignInfo): Response<ResponseBody>
+    suspend fun createUser(userSignInfo: UserSignInfo): Response<Throwable>
     suspend fun signInUser(authData: AuthData): Response<UserToken>
 }

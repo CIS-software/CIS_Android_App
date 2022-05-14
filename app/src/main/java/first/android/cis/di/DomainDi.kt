@@ -7,6 +7,7 @@ import com.cis.domain.usecases.signInUp.DeleteTokens
 import com.cis.domain.usecases.signInUp.GetTokens
 import com.cis.domain.usecases.user.CreateUser
 import com.cis.domain.usecases.user.GetUser
+import com.cis.domain.usecases.user.SignInUser
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -33,5 +34,8 @@ val domainModule = module {
     }
     factory<CreateUser>{
         CreateUser(userRepository = get())
+    }
+    factory<SignInUser>{
+        SignInUser(userRepository = get())
     }
 }

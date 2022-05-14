@@ -12,7 +12,7 @@ class UserRepositoryImpl(val context: Context): UserRepository {
         return Retrofit.usersApi.getUserInfo(userId = idAndAccessToken.userId,accessToken = idAndAccessToken.accessToken)
     }
 
-    override suspend fun createUser(userSignInfo: UserSignInfo): Response<ResponseBody> {
+    override suspend fun createUser(userSignInfo: UserSignInfo): Response<Throwable> {
         return Retrofit.usersApi.createUser(userSignInfo = userSignInfo)
     }
 

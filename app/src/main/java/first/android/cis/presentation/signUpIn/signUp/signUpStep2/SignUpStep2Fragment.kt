@@ -10,14 +10,14 @@ import android.widget.*
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.cis.domain.models.user.AuthData
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpStep2Binding
 import com.cis.domain.models.user.UserSignInfo
 //import com.example.data.network.services.SignUpService
 import com.cis.domain.usecases.signInUp.CheckInputData
-import first.android.cis.presentation.signUpIn.signUp.SignUpStep2FragmentArgs
-import first.android.cis.presentation.signUpIn.signUp.SignUpStep2FragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -61,12 +61,12 @@ class SignUpStep2Fragment : Fragment() {
         val action = SignUpStep2FragmentDirections.actionSignUpStep2FragmentToNavigationNews()
         endSignUpButton.setOnClickListener{
             if (checkUserName() and checkUserSurname() and checkDateOfBirth() and checkUserTown()){
-                //val signUpService = SignUpService(requireActivity().applicationContext)
                 val userSignInfo = UserSignInfo(args.email, args.password,
                     nameEditTextSignUp.text.toString(),
                     surnameEditSignUp.text.toString(),
                     selectedItem, dateOfBirth
                 )
+
                 step2ViewModel.createUser(userSignInfo = userSignInfo)
             }
         }
@@ -80,14 +80,31 @@ class SignUpStep2Fragment : Fragment() {
         datePickerConfig()
         return binding.root
     }
-    private fun goInApp(action: NavDirections) {
 
+    private fun goInApp(action: NavDirections) {
+        val authData = AuthData(args.email, args.password)
+        step2ViewModel.signInUser(authData = authData)
+        saveToken(action = action)
+    }
+
+    private fun saveToken(action: NavDirections){
+        step2ViewModel.signInUserResponse.observe(viewLifecycleOwner){ response ->
+            if (response.isSuccessful){
+                val tokens = response.body()
+                if (tokens != null) {
+                    step2ViewModel.saveTokens(userToken = tokens)
+                    endSignUpButton.findNavController().navigate(action)
+                }
+            } else {
+                Toast.makeText(activity, "Ошибка подключения", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun checkUserName(): Boolean{
         userNameTextView.setTextColor(Color.BLACK)
         val userName = nameEditTextSignUp.text.toString()
-        if(checkInputData.checkUserName(userName = userName)){
+        if (checkInputData.checkUserName(userName = userName)){
             return true
         }else{
             userNameTextView.setTextColor(Color.RED)

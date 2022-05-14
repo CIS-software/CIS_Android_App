@@ -28,6 +28,6 @@ val appModule = module {
     }
 
     viewModel<Step2ViewModel>{
-        Step2ViewModel(createUser = get())
+        Step2ViewModel(createUser = get(), signInUser = get(), tokensRepository = get())
     }
 }

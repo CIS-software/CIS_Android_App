@@ -13,12 +13,12 @@ import android.widget.Toast
 import first.android.cis.databinding.FragmentSignInBinding
 import com.cis.domain.models.user.AuthData
 import com.cis.domain.usecases.signInUp.CheckInputData
-import com.example.data.network.services.SignInServiceImpl
+//import com.example.data.network.services.SignInServiceImpl
 
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
 
 class SignInFragment : Fragment() {
-    private val signInService by lazy{SignInServiceImpl(requireActivity().applicationContext)}
+    //private val signInService by lazy{SignInServiceImpl(requireActivity().applicationContext)}
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
     private lateinit var signInAppBTN: Button
@@ -44,7 +44,7 @@ class SignInFragment : Fragment() {
             if(checkEmail() and checkPassword()){
                 val authData = AuthData(eMailEditTextSignIn.text.toString(), passwordEditTextSignIn.text.toString())
                 val action = SignInFragmentDirections.actionSignInFragmentToNavigationNews()
-                signInService.signInService(userAuth = authData,signInAppBTN, action)
+                //signInService.signInService(userAuth = authData,signInAppBTN, action)
             }else{
                 Toast.makeText(context, ERROR_MESSAGE, Toast.LENGTH_LONG).show()
             }

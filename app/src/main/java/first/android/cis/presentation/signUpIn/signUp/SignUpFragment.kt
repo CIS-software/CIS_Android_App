@@ -40,8 +40,7 @@ class SignUpFragment : Fragment() {
             val password: String = passwordEditTextSignUp.text.toString()
             if (checkEmail() and checkPassword()){
                 nextBtnSignUp.findNavController().
-                navigate(SignUpFragmentDirections.
-                actionSignUpFragmentToSignUpStep2Fragment(email, password))
+                navigate(SignUpFragmentDirections.actionSignUpFragmentToSignUpStep2Fragment(email, password))
             }
         }
         return binding.root

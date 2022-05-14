@@ -6,7 +6,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 class CreateUser(private val userRepository: UserRepository) {
-    suspend fun execute(userSignInfo: UserSignInfo): Response<ResponseBody>{
+    suspend fun execute(userSignInfo: UserSignInfo): Response<Throwable>{
         return userRepository.createUser(userSignInfo = userSignInfo)
     }
 }
