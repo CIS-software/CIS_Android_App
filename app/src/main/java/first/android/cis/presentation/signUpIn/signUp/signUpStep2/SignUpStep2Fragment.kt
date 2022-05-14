@@ -1,4 +1,4 @@
-package first.android.cis.presentation.signUpIn.signUp
+package first.android.cis.presentation.signUpIn.signUp.signUpStep2
 
 import android.app.DatePickerDialog
 import android.graphics.Color
@@ -7,18 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.navArgs
 import first.android.cis.R
 import first.android.cis.databinding.FragmentSignUpStep2Binding
 import com.cis.domain.models.user.UserSignInfo
-import com.example.data.network.services.SignUpService
+//import com.example.data.network.services.SignUpService
 import com.cis.domain.usecases.signInUp.CheckInputData
+import first.android.cis.presentation.signUpIn.signUp.SignUpStep2FragmentArgs
+import first.android.cis.presentation.signUpIn.signUp.SignUpStep2FragmentDirections
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 private const val ERROR_MESSAGE = "Ошибка! Данные введены неверно!"
 
 class SignUpStep2Fragment : Fragment() {
+    private val step2ViewModel by viewModel<Step2ViewModel>()
     private val args: SignUpStep2FragmentArgs by navArgs()
     lateinit var selectedItem: String
     private var dateOfBirth: String = ""
@@ -52,21 +58,32 @@ class SignUpStep2Fragment : Fragment() {
             townTextView = it.townTextView
             dateTextView = it.dateTextView
         }
+        val action = SignUpStep2FragmentDirections.actionSignUpStep2FragmentToNavigationNews()
         endSignUpButton.setOnClickListener{
             if (checkUserName() and checkUserSurname() and checkDateOfBirth() and checkUserTown()){
-                val signUpService = SignUpService(requireActivity().applicationContext)
-                val action = SignUpStep2FragmentDirections.actionSignUpStep2FragmentToNavigationNews()
+                //val signUpService = SignUpService(requireActivity().applicationContext)
                 val userSignInfo = UserSignInfo(args.email, args.password,
                     nameEditTextSignUp.text.toString(),
                     surnameEditSignUp.text.toString(),
                     selectedItem, dateOfBirth
                 )
-                signUpService.createUserService(userSignInfo = userSignInfo, endSignUpButton, action = action)
+                step2ViewModel.createUser(userSignInfo = userSignInfo)
+            }
+        }
+        step2ViewModel.createUserResponse.observe(viewLifecycleOwner){ response ->
+            if(response.isSuccessful){
+                goInApp(action)
+            } else {
+                Toast.makeText(activity, "Ошибка подключения", Toast.LENGTH_LONG).show()
             }
         }
         datePickerConfig()
         return binding.root
     }
+    private fun goInApp(action: NavDirections) {
+
+    }
+
     private fun checkUserName(): Boolean{
         userNameTextView.setTextColor(Color.BLACK)
         val userName = nameEditTextSignUp.text.toString()

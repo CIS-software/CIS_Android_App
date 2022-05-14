@@ -1,4 +1,4 @@
-package com.example.data.network.services
+/*package com.example.data.network.services
 
 import android.content.Context
 import android.widget.Button
@@ -14,7 +14,7 @@ import retrofit2.Response
 
 class SignUpService(val context: Context) {
     fun createUserService(userSignInfo: UserSignInfo, button: Button, action: NavDirections) {
-        Retrofit.usersApi.createUserInfo(userSignInfo).enqueue(
+        Retrofit.usersApi.createUser(userSignInfo).enqueue(
             object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
@@ -31,4 +31,4 @@ class SignUpService(val context: Context) {
             }
         )
     }
-}
+}*/
