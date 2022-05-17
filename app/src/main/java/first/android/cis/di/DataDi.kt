@@ -1,8 +1,10 @@
 package first.android.cis.di
 
+import com.cis.domain.repository.CalendarRepository
 import com.cis.domain.repository.NewsRepository
 import com.cis.domain.repository.TokensRepository
 import com.cis.domain.repository.UserRepository
+import com.example.data.calendar.CalendarRepositoryImpl
 import com.example.data.newsRepository.NewsRepositoryImpl
 import com.example.data.storage.TokensStorage
 import com.example.data.storage.sharedpref.SharedPrefTokensStorage
@@ -23,5 +25,8 @@ val dataModule = module {
     }
     single<NewsRepository>{
         NewsRepositoryImpl()
+    }
+    single<CalendarRepository>{
+        CalendarRepositoryImpl()
     }
 }

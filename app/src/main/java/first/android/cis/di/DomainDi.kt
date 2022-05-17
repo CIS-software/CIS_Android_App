@@ -1,5 +1,6 @@
 package first.android.cis.di
 import com.cis.domain.repository.UserRepository
+import com.cis.domain.usecases.calendar.GetCalendar
 import com.cis.domain.usecases.news.AddNews
 import com.cis.domain.usecases.news.DeleteNews
 import com.cis.domain.usecases.news.GetNews
@@ -21,6 +22,7 @@ val domainModule = module {
     factory<GetNews> {
         GetNews(newsRepository = get())
     }
+
     //SignInUp
     factory<DeleteTokens> {
         DeleteTokens(tokensRepository = get())
@@ -28,6 +30,7 @@ val domainModule = module {
     factory<GetTokens> {
         GetTokens(tokensRepository = get())
     }
+
     //User
     factory<GetUser>{
         GetUser(userRepository = get())
@@ -37,5 +40,10 @@ val domainModule = module {
     }
     factory<SignInUser>{
         SignInUser(userRepository = get())
+    }
+
+    //Calendar
+    factory<GetCalendar> {
+        GetCalendar(calendarRepository = get())
     }
 }

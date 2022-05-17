@@ -1,5 +1,6 @@
 package first.android.cis.di
 
+import first.android.cis.presentation.calendar.CalendarViewModel
 import first.android.cis.presentation.news.addNews.AddNewsViewModel
 import first.android.cis.presentation.news.mainNews.NewsViewModel
 import first.android.cis.presentation.news.openedNews.OpenedNewsViewModel
@@ -34,5 +35,9 @@ val appModule = module {
 
     viewModel<SignInViewModel>{
         SignInViewModel(tokensRepository = get(), signInUser = get())
+    }
+
+    viewModel<CalendarViewModel>{
+        CalendarViewModel(getTokens = get(), getCalendar = get())
     }
 }
