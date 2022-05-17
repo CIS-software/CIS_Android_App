@@ -1,5 +1,6 @@
 package com.example.data.network
 
+import com.example.data.network.api.CalendarApi
 import com.example.data.network.api.NewsApi
 import com.example.data.network.api.UsersApi
 import retrofit2.Retrofit
@@ -17,4 +18,7 @@ object Retrofit {
 
     val usersApi: UsersApi =
         retrofit.create(UsersApi::class.java)
+
+    val calendarApi: CalendarApi =
+        retrofit.create(CalendarApi::class.java)
 }

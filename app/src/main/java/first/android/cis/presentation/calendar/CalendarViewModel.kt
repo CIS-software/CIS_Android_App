@@ -1,13 +1,12 @@
 package first.android.cis.presentation.calendar
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.cis.domain.models.calendar.CalendarList
+import retrofit2.Response
 
 class CalendarViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "Coming soon..."
-    }
-    val text: LiveData<String> = _text
+    val myCalendarList: MutableLiveData<Response<CalendarList>> = MutableLiveData()
+
 }
