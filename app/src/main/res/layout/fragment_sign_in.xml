@@ -35,7 +35,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:background="@drawable/sign_edit_text_style"
+        style="@style/MainButton"
         android:text="@string/sign_in"
         android:textAllCaps="false"
         android:textSize="20sp"
@@ -78,7 +78,8 @@
         android:padding="12dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/emailTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
 
     <TextView
