@@ -73,7 +73,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/sign_edit_text_style"
+        android:background="@drawable/sign_edit_text_background"
         android:inputType="textEmailAddress"
         android:padding="12dp"
         android:textColor="@color/black"
@@ -107,7 +107,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="228dp"
-            android:background="@drawable/sign_edit_text_style"
+            android:background="@drawable/sign_edit_text_background"
             android:inputType="textPassword"
             android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>

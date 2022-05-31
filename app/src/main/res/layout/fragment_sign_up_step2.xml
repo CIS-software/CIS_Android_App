@@ -58,7 +58,7 @@
         style="@style/edit_text_sign_style"
         android:inputType="textAutoCorrect|textCapSentences"
         android:layout_marginTop="8dp"
-        android:background="@drawable/sign_edit_text_style"
+        android:background="@drawable/sign_edit_text_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
@@ -76,7 +76,7 @@
         android:inputType="textAutoCorrect|textCapSentences"
         style="@style/edit_text_sign_style"
         android:layout_marginTop="8dp"
-        android:background="@drawable/sign_edit_text_style"
+        android:background="@drawable/sign_edit_text_background"
         app:layout_constraintStart_toStartOf="@+id/userSurnameTextView"
         app:layout_constraintTop_toBottomOf="@+id/userSurnameTextView" />
 
@@ -94,7 +94,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/sign_edit_text_style"
+        android:background="@drawable/sign_edit_text_background"
         android:entries="@array/towns"
         app:layout_constraintStart_toStartOf="@+id/townTextView"
         app:layout_constraintTop_toBottomOf="@+id/townTextView"/>
@@ -109,7 +109,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/datePickerBtn"
-        android:background="@drawable/sign_edit_text_style"
+        android:background="@drawable/sign_edit_text_background"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
